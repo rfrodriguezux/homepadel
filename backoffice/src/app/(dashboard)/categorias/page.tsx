@@ -20,6 +20,7 @@ interface Category {
   id: string;
   name: string;
   slug: string;
+  order?: number;
   isActive: boolean;
   _count?: { products: number };
 }
@@ -27,6 +28,7 @@ interface Category {
 // ─── Schema ────────────────────────────────────────────────────────────────
 const schema = z.object({
   name: z.string().min(2, 'El nombre debe tener al menos 2 caracteres'),
+  order: z.coerce.number().int().min(0).default(0),
   isActive: z.boolean().default(true),
 });
 type FormData = z.infer<typeof schema>;
@@ -62,13 +64,13 @@ export default function CategoriasPage() {
 
   const openCreate = () => {
     setEditItem(null);
-    reset({ name: '', isActive: true });
+    reset({ name: '', order: 0, isActive: true });
     setModalOpen(true);
   };
 
   const openEdit = (c: Category) => {
     setEditItem(c);
-    reset({ name: c.name, isActive: c.isActive });
+    reset({ name: c.name, order: c.order ?? 0, isActive: c.isActive });
     setModalOpen(true);
   };
 
@@ -192,6 +194,16 @@ export default function CategoriasPage() {
             />
             {errors.name && <p className="text-xs text-red-600 mt-1">{errors.name.message}</p>}
             <p className="text-xs text-gray-400 mt-1">El slug se generará automáticamente.</p>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Orden (en el inicio)</label>
+            <input
+              type="number"
+              min={0}
+              {...register('order')}
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#C8FF00]/40 focus:border-[#C8FF00]"
+            />
+            <p className="text-xs text-gray-400 mt-1">Número menor = aparece primero en la grilla de categorías.</p>
           </div>
           <div className="flex items-center gap-3">
             <input type="checkbox" id="catActive" {...register('isActive')} className="w-4 h-4 rounded accent-[#C8FF00]" />

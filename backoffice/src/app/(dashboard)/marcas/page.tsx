@@ -22,12 +22,16 @@ interface Brand {
   slug: string;
   isActive: boolean;
   logoUrl?: string;
+  url?: string;
+  order?: number;
   _count?: { products: number };
 }
 
 // ─── Schema ─────────────────────────────────────────────────────────────────
 const schema = z.object({
   name: z.string().min(2, 'El nombre es requerido'),
+  url: z.string().url('Debe ser una URL válida').optional().or(z.literal('')),
+  order: z.coerce.number().int().min(0).default(0),
   isActive: z.boolean().default(true),
 });
 type FormData = z.infer<typeof schema>;
@@ -63,13 +67,13 @@ export default function MarcasPage() {
 
   const openCreate = () => {
     setEditItem(null);
-    reset({ name: '', isActive: true });
+    reset({ name: '', url: '', order: 0, isActive: true });
     setModalOpen(true);
   };
 
   const openEdit = (b: Brand) => {
     setEditItem(b);
-    reset({ name: b.name, isActive: b.isActive });
+    reset({ name: b.name, url: b.url ?? '', order: b.order ?? 0, isActive: b.isActive });
     setModalOpen(true);
   };
 
@@ -207,6 +211,25 @@ export default function MarcasPage() {
               placeholder="Ej: Bullpadel"
             />
             {errors.name && <p className="text-xs text-red-600 mt-1">{errors.name.message}</p>}
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">URL del sitio web</label>
+            <input
+              {...register('url')}
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#C8FF00]/40 focus:border-[#C8FF00]"
+              placeholder="https://bullpadel.com"
+            />
+            {errors.url && <p className="text-xs text-red-600 mt-1">{errors.url.message}</p>}
+            <p className="text-xs text-gray-400 mt-1">Opcional — el logo del slider enlazará a esta URL.</p>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Orden en el slider</label>
+            <input
+              type="number"
+              min={0}
+              {...register('order')}
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#C8FF00]/40 focus:border-[#C8FF00]"
+            />
           </div>
           <div className="flex items-center gap-3">
             <input type="checkbox" id="brandActive" {...register('isActive')} className="w-4 h-4 rounded accent-[#C8FF00]" />

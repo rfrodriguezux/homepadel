@@ -34,6 +34,8 @@ interface Product {
   stock: number;
   isActive: boolean;
   isFeatured: boolean;
+  isNew?: boolean;
+  isOffer?: boolean;
   category?: { id: string; name: string };
   brand?: { id: string; name: string };
   images?: string[];
@@ -54,6 +56,8 @@ const productSchema = z.object({
   categoryId: z.string().optional(),
   brandId: z.string().optional(),
   isFeatured: z.boolean().default(false),
+  isNew: z.boolean().default(false),
+  isOffer: z.boolean().default(false),
   isActive: z.boolean().default(true),
 });
 type ProductForm = z.infer<typeof productSchema>;
@@ -184,7 +188,7 @@ export default function ProductosPage() {
   // ── CRUD helpers ─────────────────────────────────────────────────────────────
   const openCreate = () => {
     setEditProduct(null);
-    reset({ isActive: true, isFeatured: false, stock: 0, price: 0 });
+    reset({ isActive: true, isFeatured: false, isNew: false, isOffer: false, stock: 0, price: 0 });
     setModalOpen(true);
   };
 
@@ -200,6 +204,8 @@ export default function ProductosPage() {
       categoryId: p.category?.id ?? '',
       brandId: p.brand?.id ?? '',
       isFeatured: p.isFeatured,
+      isNew: p.isNew ?? false,
+      isOffer: p.isOffer ?? false,
       isActive: p.isActive,
     });
     setModalOpen(true);
@@ -410,13 +416,23 @@ export default function ProductosPage() {
             </div>
 
             {/* Toggles */}
-            <div className="flex items-center gap-3">
-              <input type="checkbox" id="isFeatured" {...register('isFeatured')} className="w-4 h-4 rounded accent-[#C8FF00]" />
-              <label htmlFor="isFeatured" className="text-sm text-gray-700">Producto destacado</label>
-            </div>
-            <div className="flex items-center gap-3">
-              <input type="checkbox" id="isActive" {...register('isActive')} className="w-4 h-4 rounded accent-[#C8FF00]" />
-              <label htmlFor="isActive" className="text-sm text-gray-700">Activo / visible</label>
+            <div className="sm:col-span-2 grid grid-cols-2 sm:grid-cols-4 gap-3 bg-gray-50 rounded-lg p-3">
+              <div className="flex items-center gap-2">
+                <input type="checkbox" id="isFeatured" {...register('isFeatured')} className="w-4 h-4 rounded accent-[#C8FF00]" />
+                <label htmlFor="isFeatured" className="text-sm text-gray-700">Destacado</label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input type="checkbox" id="isNew" {...register('isNew')} className="w-4 h-4 rounded accent-[#C8FF00]" />
+                <label htmlFor="isNew" className="text-sm text-gray-700">Badge NUEVO</label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input type="checkbox" id="isOffer" {...register('isOffer')} className="w-4 h-4 rounded accent-[#C8FF00]" />
+                <label htmlFor="isOffer" className="text-sm text-gray-700">Badge OFERTA</label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input type="checkbox" id="isActive" {...register('isActive')} className="w-4 h-4 rounded accent-[#C8FF00]" />
+                <label htmlFor="isActive" className="text-sm text-gray-700">Activo</label>
+              </div>
             </div>
           </div>
 

@@ -20,6 +20,8 @@ interface Banner {
   id: string;
   title: string;
   imageUrl?: string;
+  imageMobile?: string;
+  ctaText?: string;
   link?: string;
   order: number;
   isActive: boolean;
@@ -29,6 +31,8 @@ interface Banner {
 const schema = z.object({
   title: z.string().min(2, 'El título es requerido'),
   imageUrl: z.string().url('Debe ser una URL válida').optional().or(z.literal('')),
+  imageMobile: z.string().url('Debe ser una URL válida').optional().or(z.literal('')),
+  ctaText: z.string().optional(),
   link: z.string().url('Debe ser una URL válida').optional().or(z.literal('')),
   order: z.coerce.number().int().min(0),
   isActive: z.boolean().default(true),
@@ -73,7 +77,15 @@ export default function BannersPage() {
 
   const openEdit = (b: Banner) => {
     setEditItem(b);
-    reset({ title: b.title, imageUrl: b.imageUrl ?? '', link: b.link ?? '', order: b.order, isActive: b.isActive });
+    reset({
+      title: b.title,
+      imageUrl: b.imageUrl ?? '',
+      imageMobile: b.imageMobile ?? '',
+      ctaText: b.ctaText ?? '',
+      link: b.link ?? '',
+      order: b.order,
+      isActive: b.isActive,
+    });
     setModalOpen(true);
   };
 
@@ -235,15 +247,20 @@ export default function BannersPage() {
             {errors.title && <p className="text-xs text-red-600 mt-1">{errors.title.message}</p>}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">URL de imagen</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Imagen desktop (URL)</label>
             <input {...register('imageUrl')} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#C8FF00]/40 focus:border-[#C8FF00]" placeholder="https://..." />
             {errors.imageUrl && <p className="text-xs text-red-600 mt-1">{errors.imageUrl.message}</p>}
-            <p className="text-xs text-gray-400 mt-1">O usa el botón para subir desde tu computadora.</p>
-            <label className="mt-2 flex items-center justify-center gap-2 py-5 border-2 border-dashed border-gray-200 rounded-lg cursor-pointer hover:border-[#C8FF00] transition-colors text-gray-400 text-sm">
-              <ImageIcon className="w-4 h-4" />
-              Subir imagen
-              <input type="file" accept="image/*" className="hidden" />
-            </label>
+            <p className="text-xs text-gray-400 mt-1">Recomendado: 1920×600px</p>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Imagen mobile (URL)</label>
+            <input {...register('imageMobile')} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#C8FF00]/40 focus:border-[#C8FF00]" placeholder="https://..." />
+            {errors.imageMobile && <p className="text-xs text-red-600 mt-1">{errors.imageMobile.message}</p>}
+            <p className="text-xs text-gray-400 mt-1">Recomendado: 768×500px — opcional</p>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Texto del botón CTA</label>
+            <input {...register('ctaText')} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#C8FF00]/40 focus:border-[#C8FF00]" placeholder="VER OFERTA" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Link (URL de destino)</label>

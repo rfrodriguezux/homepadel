@@ -1,8 +1,3 @@
-// Sidebar navigation component for the Home Pádel BackOffice dashboard.
-// Shows the brand logo and all main navigation links with Lucide icons.
-// Active route is highlighted with a lime left border and lighter background.
-// Collapses to an icon-only strip on small screens (mobile toggle handled by parent).
-
 'use client';
 
 import Link from 'next/link';
@@ -19,6 +14,12 @@ import {
   Tag,
   Receipt,
   Settings,
+  PlaySquare,
+  Sparkles,
+  MessageSquare,
+  Info,
+  Instagram,
+  Megaphone,
 } from 'lucide-react';
 
 interface NavItem {
@@ -27,18 +28,53 @@ interface NavItem {
   icon: React.ComponentType<{ className?: string }>;
 }
 
-const navItems: NavItem[] = [
-  { label: 'Dashboard', href: '/', icon: LayoutDashboard },
-  { label: 'Productos', href: '/productos', icon: Package },
-  { label: 'Categorías', href: '/categorias', icon: Tags },
-  { label: 'Marcas', href: '/marcas', icon: Award },
-  { label: 'Pedidos', href: '/pedidos', icon: ShoppingBag },
-  { label: 'Clientes', href: '/clientes', icon: Users },
-  { label: 'Promociones', href: '/promociones', icon: Percent },
-  { label: 'Banners', href: '/banners', icon: Image },
-  { label: 'Cupones', href: '/cupones', icon: Tag },
-  { label: 'Gastos', href: '/gastos', icon: Receipt },
-  { label: 'Configuración', href: '/configuracion', icon: Settings },
+interface NavGroup {
+  title?: string;
+  items: NavItem[];
+}
+
+const navGroups: NavGroup[] = [
+  {
+    items: [
+      { label: 'Dashboard', href: '/', icon: LayoutDashboard },
+    ],
+  },
+  {
+    title: 'Tienda',
+    items: [
+      { label: 'Productos', href: '/productos', icon: Package },
+      { label: 'Categorías', href: '/categorias', icon: Tags },
+      { label: 'Marcas', href: '/marcas', icon: Award },
+      { label: 'Pedidos', href: '/pedidos', icon: ShoppingBag },
+      { label: 'Clientes', href: '/clientes', icon: Users },
+    ],
+  },
+  {
+    title: 'Marketing',
+    items: [
+      { label: 'Promociones', href: '/promociones', icon: Percent },
+      { label: 'Banners', href: '/banners', icon: Image },
+      { label: 'Cupones', href: '/cupones', icon: Tag },
+    ],
+  },
+  {
+    title: 'Contenido Home',
+    items: [
+      { label: 'Hero Slider', href: '/hero', icon: PlaySquare },
+      { label: 'Beneficios', href: '/beneficios', icon: Sparkles },
+      { label: 'Testimonios', href: '/testimonios', icon: MessageSquare },
+      { label: 'Sobre Nosotros', href: '/configuracion/about', icon: Info },
+      { label: 'Instagram', href: '/configuracion/instagram', icon: Instagram },
+      { label: 'Mensaje Final', href: '/configuracion/mensaje-final', icon: Megaphone },
+    ],
+  },
+  {
+    title: 'Sistema',
+    items: [
+      { label: 'Gastos', href: '/gastos', icon: Receipt },
+      { label: 'Configuración', href: '/configuracion', icon: Settings },
+    ],
+  },
 ];
 
 export function Sidebar() {
@@ -46,6 +82,8 @@ export function Sidebar() {
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/';
+    // Exact match for /configuracion (not /configuracion/*)
+    if (href === '/configuracion') return pathname === '/configuracion';
     return pathname.startsWith(href);
   };
 
@@ -61,38 +99,45 @@ export function Sidebar() {
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-3 py-4 overflow-y-auto">
-        <ul className="space-y-0.5">
-          {navItems.map((item) => {
-            const active = isActive(item.href);
-            const Icon = item.icon;
-            return (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={`
-                    flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150
-                    ${
-                      active
-                        ? 'bg-[#1e293b] text-white border-l-2 border-[#C8FF00] pl-[10px]'
-                        : 'text-slate-400 hover:bg-[#1e293b] hover:text-white border-l-2 border-transparent pl-[10px]'
-                    }
-                  `}
-                >
-                  <Icon
-                    className={`w-4 h-4 shrink-0 ${active ? 'text-[#C8FF00]' : 'text-slate-500'}`}
-                  />
-                  {item.label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+      <nav className="flex-1 px-3 py-4 overflow-y-auto space-y-4">
+        {navGroups.map((group, gi) => (
+          <div key={gi}>
+            {group.title && (
+              <p className="px-3 mb-1 text-[10px] font-bold uppercase tracking-widest text-slate-600">
+                {group.title}
+              </p>
+            )}
+            <ul className="space-y-0.5">
+              {group.items.map((item) => {
+                const active = isActive(item.href);
+                const Icon = item.icon;
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className={`
+                        flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150
+                        ${
+                          active
+                            ? 'bg-[#1e293b] text-white border-l-2 border-[#C8FF00] pl-[10px]'
+                            : 'text-slate-400 hover:bg-[#1e293b] hover:text-white border-l-2 border-transparent pl-[10px]'
+                        }
+                      `}
+                    >
+                      <Icon className={`w-4 h-4 shrink-0 ${active ? 'text-[#C8FF00]' : 'text-slate-500'}`} />
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
       </nav>
 
-      {/* Footer version info */}
+      {/* Footer */}
       <div className="px-6 py-4 border-t border-white/10">
-        <p className="text-slate-600 text-xs">BackOffice v1.0.0</p>
+        <p className="text-slate-600 text-xs">BackOffice v1.1.0</p>
       </div>
     </aside>
   );
