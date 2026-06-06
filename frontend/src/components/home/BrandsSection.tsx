@@ -9,14 +9,13 @@ interface Props {
 }
 
 const FALLBACK_BRANDS: { id: string; name: string }[] = [
+  { id: 'nox',       name: 'NOX' },
+  { id: 'babolat',   name: 'Babolat' },
   { id: 'bullpadel', name: 'Bullpadel' },
-  { id: 'nox', name: 'NOX' },
-  { id: 'adidas', name: 'Adidas' },
-  { id: 'babolat', name: 'Babolat' },
-  { id: 'wilson', name: 'Wilson' },
-  { id: 'head', name: 'Head' },
-  { id: 'ulrich', name: 'Ulrich' },
-  { id: 'prince', name: 'Prince' },
+  { id: 'adidas',    name: 'adidas' },
+  { id: 'wilson',    name: 'Wilson' },
+  { id: 'siux',      name: 'Siux' },
+  { id: 'head',      name: 'HEAD' },
 ];
 
 interface SlotProps {
@@ -34,10 +33,10 @@ function BrandSlot({ id, name, logo, url, suffix = '' }: SlotProps) {
     <img
       src={getImageUrl(logo)}
       alt={name}
-      className="h-7 md:h-9 w-auto object-contain grayscale hover:grayscale-0 opacity-40 hover:opacity-80 transition-all duration-300"
+      className="h-6 md:h-8 w-auto object-contain brightness-0 invert opacity-40 hover:opacity-80 transition-all duration-300"
     />
   ) : (
-    <span className="text-gray-500 font-black text-sm uppercase tracking-wider hover:text-gray-300 transition-colors whitespace-nowrap cursor-default">
+    <span className="text-white/30 font-black text-sm uppercase tracking-wider hover:text-white/70 transition-colors whitespace-nowrap cursor-default select-none">
       {name}
     </span>
   );
@@ -66,7 +65,7 @@ export default function BrandsSection({ brands }: Props) {
     const track = trackRef.current;
     if (!track) return;
 
-    const SPEED = 0.55;
+    const SPEED = 0.5;
 
     const step = () => {
       if (!pausedRef.current) {
@@ -92,33 +91,23 @@ export default function BrandsSection({ brands }: Props) {
     };
   }, []);
 
-  // Render two copies for seamless loop
   const renderSlots = (suffix: string) =>
     hasBrands
       ? brands!.map((b) => (
-          <BrandSlot
-            key={b.id + suffix}
-            id={b.id}
-            name={b.name}
-            logo={b.logo}
-            url={b.url}
-            suffix={suffix}
-          />
+          <BrandSlot key={b.id + suffix} id={b.id} name={b.name} logo={b.logo} url={b.url} suffix={suffix} />
         ))
       : FALLBACK_BRANDS.map((b) => (
           <BrandSlot key={b.id + suffix} id={b.id} name={b.name} suffix={suffix} />
         ));
 
   return (
-    <section className="bg-white border-t border-b border-gray-100 py-10 overflow-hidden">
+    <section className="bg-[#0a0a0a] border-t border-white/5 py-10 overflow-hidden">
       {/* Título centrado */}
-      <div className="text-center mb-8">
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400">
-          MARCAS QUE CONFÍAN EN NOSOTROS
-        </p>
-      </div>
+      <p className="text-center text-[10px] font-black uppercase tracking-[0.3em] text-white/25 mb-8">
+        MARCAS QUE CONFÍAN EN NOSOTROS
+      </p>
 
-      {/* Track deslizante */}
+      {/* Slider continuo */}
       <div className="overflow-hidden">
         <div ref={trackRef} className="flex will-change-transform">
           {renderSlots('')}

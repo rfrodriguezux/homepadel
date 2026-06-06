@@ -37,7 +37,7 @@ function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       href={`/producto/${product.slug}`}
-      className="bg-[#1a1a1a] rounded-xl border border-white/10 hover:border-white/20 hover:-translate-y-1 transition-all duration-200 flex flex-col overflow-hidden group block"
+      className="bg-[#1a1a1a] rounded-xl border border-white/8 hover:border-white/20 hover:-translate-y-0.5 transition-all duration-200 flex flex-col overflow-hidden group block"
     >
       {/* Imagen */}
       <div className="relative aspect-square bg-[#111] overflow-hidden">
@@ -50,7 +50,7 @@ function ProductCard({ product }: { product: Product }) {
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-[#111]">
-            <span className="text-3xl font-black text-white/10">
+            <span className="text-3xl font-black text-white/8">
               {product.name.slice(0, 2).toUpperCase()}
             </span>
           </div>
@@ -77,24 +77,24 @@ function ProductCard({ product }: { product: Product }) {
 
         <button
           onClick={handleWish}
-          className={`absolute top-2 right-2 w-8 h-8 rounded-full flex items-center justify-center z-10 shadow-sm transition-all duration-200 ${
-            wished ? 'bg-red-500 text-white' : 'bg-black/50 text-gray-400 hover:text-red-400 hover:bg-black/70'
+          className={`absolute top-2 right-2 w-7 h-7 rounded-full flex items-center justify-center z-10 transition-all duration-200 ${
+            wished ? 'bg-red-500 text-white' : 'bg-black/50 text-gray-500 hover:text-red-400'
           }`}
           aria-label={wished ? 'Quitar de favoritos' : 'Agregar a favoritos'}
         >
-          <Heart size={15} fill={wished ? 'currentColor' : 'none'} />
+          <Heart size={13} fill={wished ? 'currentColor' : 'none'} />
         </button>
       </div>
 
       {/* Info */}
-      <div className="flex flex-col flex-1 p-4 gap-1.5">
+      <div className="flex flex-col flex-1 p-4 gap-1">
         {product.brand && (
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider">
+          <p className="text-xs text-gray-600 font-semibold uppercase tracking-wider">
             {product.brand.name}
           </p>
         )}
 
-        <h3 className="font-semibold text-sm text-white leading-snug line-clamp-2">
+        <h3 className="font-bold text-sm text-white leading-snug line-clamp-2 uppercase">
           {product.name}
         </h3>
 
@@ -104,7 +104,7 @@ function ProductCard({ product }: { product: Product }) {
               <span className="text-lg font-black text-white">
                 {formatPrice(product.salePrice!)}
               </span>
-              <span className="text-sm text-gray-600 line-through">
+              <span className="text-xs text-gray-600 line-through">
                 {formatPrice(product.price)}
               </span>
             </>
@@ -125,16 +125,16 @@ function ProductCard({ product }: { product: Product }) {
         <button
           onClick={handleAdd}
           disabled={product.stock === 0 || adding}
-          className={`mt-auto w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-xs font-black uppercase tracking-wide transition-all duration-200 ${
+          className={`mt-2 w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-xs font-black uppercase tracking-wide transition-all duration-200 ${
             product.stock === 0
-              ? 'bg-white/5 text-gray-600 cursor-not-allowed border border-white/5'
+              ? 'bg-white/5 text-gray-600 cursor-not-allowed'
               : adding
-              ? 'bg-white text-[#111] scale-95'
-              : 'bg-[#C8FF00] text-[#111] hover:bg-white'
+              ? 'bg-[#C8FF00] text-[#111] scale-95'
+              : 'bg-[#111] border border-white/10 text-white hover:border-[#C8FF00] hover:text-[#C8FF00]'
           }`}
         >
           <ShoppingCart size={13} />
-          {product.stock === 0 ? 'Sin stock' : adding ? '¡Agregado! ✓' : 'Agregar al carrito'}
+          {product.stock === 0 ? 'Sin stock' : adding ? '¡Agregado! ✓' : 'COMPRAR'}
         </button>
       </div>
     </Link>
@@ -142,10 +142,10 @@ function ProductCard({ product }: { product: Product }) {
 }
 
 const MOCK_PRODUCTS: Product[] = [
-  { id: '1', name: 'Vertex 04 2025', slug: 'vertex-04-2025', price: 374999, salePrice: 299999, sku: 'BUL-001', stock: 8, images: [], featured: true, isNew: false, isOffer: false, description: '', category: { id: '1', name: 'Paletas', slug: 'paletas' }, brand: { id: '1', name: 'Bullpadel', slug: 'bullpadel' } },
-  { id: '2', name: 'Metalbone HRD 3.4', slug: 'metalbone-hrd-3-4', price: 349999, salePrice: 279999, sku: 'ADI-001', stock: 12, images: [], featured: true, isNew: true, isOffer: false, description: '', category: { id: '1', name: 'Paletas', slug: 'paletas' }, brand: { id: '2', name: 'Adidas', slug: 'adidas' } },
-  { id: '3', name: 'Air Viper 2025', slug: 'air-viper-2025', price: 339999, salePrice: 269999, sku: 'BAB-001', stock: 6, images: [], featured: true, isNew: false, isOffer: true, description: '', category: { id: '1', name: 'Paletas', slug: 'paletas' }, brand: { id: '3', name: 'Babolat', slug: 'babolat' } },
-  { id: '4', name: 'AT10 Genius 18K', slug: 'at10-genius-18k', price: 359999, salePrice: 289999, sku: 'NOX-001', stock: 4, images: [], featured: true, isNew: false, isOffer: false, description: '', category: { id: '1', name: 'Paletas', slug: 'paletas' }, brand: { id: '4', name: 'Nox', slug: 'nox' } },
+  { id: '1', name: 'NOX AT10 Genius WR 2024',  slug: 'nox-at10-genius-wr-2024', price: 550000, salePrice: undefined, sku: 'NOX-001', stock: 8,  images: [], featured: true, isNew: false, isOffer: false, description: '', category: { id: '1', name: 'Paletas', slug: 'paletas' }, brand: { id: '1', name: 'NOX',      slug: 'nox' } },
+  { id: '2', name: 'Bullpadel Hack 04 2024',   slug: 'bullpadel-hack-04-2024',  price: 525000, salePrice: undefined, sku: 'BUL-001', stock: 12, images: [], featured: true, isNew: true,  isOffer: false, description: '', category: { id: '1', name: 'Paletas', slug: 'paletas' }, brand: { id: '2', name: 'Bullpadel', slug: 'bullpadel' } },
+  { id: '3', name: 'Adidas Metalbone 3.3 2025', slug: 'adidas-metalbone-3-3',   price: 530000, salePrice: undefined, sku: 'ADI-001', stock: 6,  images: [], featured: true, isNew: false, isOffer: true,  description: '', category: { id: '1', name: 'Paletas', slug: 'paletas' }, brand: { id: '3', name: 'Adidas',    slug: 'adidas' } },
+  { id: '4', name: 'Paletero NOX AT10 Team',   slug: 'paletero-nox-at10-team',  price: 210000, salePrice: undefined, sku: 'NOX-002', stock: 4,  images: [], featured: true, isNew: false, isOffer: false, description: '', category: { id: '2', name: 'Paleteros', slug: 'paleteros' }, brand: { id: '4', name: 'NOX',     slug: 'nox' } },
 ];
 
 export default function FeaturedProducts({ products }: Props) {
@@ -158,48 +158,46 @@ export default function FeaturedProducts({ products }: Props) {
   const displayProducts = products && products.length > 0 ? products : MOCK_PRODUCTS;
 
   return (
-    <section className="bg-[#0a0a0a] py-14">
+    <section className="bg-[#0a0a0a] py-14 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4">
         {/* Encabezado */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <p className="text-[#C8FF00] text-xs font-black uppercase tracking-[0.25em] mb-1">
-              Selección de la semana
-            </p>
             <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-white">
-              Las más vendidas del mes
+              LAS MÁS VENDIDAS DEL MES
             </h2>
+            <p className="text-gray-600 text-sm mt-0.5">Elegidas por nuestra comunidad.</p>
           </div>
           <Link
             href="/catalogo"
-            className="text-sm font-bold text-gray-400 hover:text-white transition-colors flex items-center gap-1"
+            className="text-sm font-bold text-gray-500 hover:text-white transition-colors flex items-center gap-1 uppercase tracking-wider"
           >
             VER TODOS
             <ChevronRight size={14} />
           </Link>
         </div>
 
-        {/* Carrusel con flechas */}
+        {/* Carrusel */}
         <div className="relative">
           <button
             onClick={() => scroll('left')}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 z-10 w-9 h-9 bg-white/10 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors shadow-lg hidden md:flex"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-8 h-8 bg-[#1a1a1a] border border-white/10 rounded-full flex items-center justify-center text-white hover:border-white/30 transition-colors hidden md:flex"
             aria-label="Ver anteriores"
           >
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="16" height="16" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 4L7 9l5 5"/>
             </svg>
           </button>
 
           <div
             ref={scrollRef}
-            className="flex gap-4 overflow-x-auto pb-2"
+            className="flex gap-4 overflow-x-auto pb-1"
             style={{ scrollbarWidth: 'none', scrollSnapType: 'x mandatory' }}
           >
             {displayProducts.map((product) => (
               <div
                 key={product.id}
-                className="flex-none w-60 md:w-64"
+                className="flex-none w-60 md:w-[240px]"
                 style={{ scrollSnapAlign: 'start' }}
               >
                 <ProductCard product={product} />
@@ -209,10 +207,10 @@ export default function FeaturedProducts({ products }: Props) {
 
           <button
             onClick={() => scroll('right')}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 z-10 w-9 h-9 bg-white/10 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors shadow-lg hidden md:flex"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-8 h-8 bg-[#1a1a1a] border border-white/10 rounded-full flex items-center justify-center text-white hover:border-white/30 transition-colors hidden md:flex"
             aria-label="Ver más"
           >
-            <ChevronRight size={18} />
+            <ChevronRight size={16} />
           </button>
         </div>
       </div>
