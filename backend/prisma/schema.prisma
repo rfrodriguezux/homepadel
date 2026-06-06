@@ -1,5 +1,7 @@
 // Esquema Prisma para HomePadel
-// Modelos: User, Product, Category, Brand, Order, OrderItem, Promotion, Coupon, Banner, Expense
+// Modelos: User, Product, Category, Brand, Order, OrderItem,
+//          Promotion, Coupon, Banner, Expense,
+//          HeroSlide, Benefit, Testimonial, SiteSection
 
 generator client {
   provider = "prisma-client-js"
@@ -41,6 +43,7 @@ model Category {
   name      String    @unique
   slug      String    @unique
   image     String?
+  order     Int       @default(0)
   active    Boolean   @default(true)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -52,6 +55,8 @@ model Brand {
   name      String    @unique
   slug      String    @unique
   logo      String?
+  url       String?
+  order     Int       @default(0)
   active    Boolean   @default(true)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -69,6 +74,8 @@ model Product {
   stock       Int         @default(0)
   images      String[]
   featured    Boolean     @default(false)
+  isNew       Boolean     @default(false)
+  isOffer     Boolean     @default(false)
   active      Boolean     @default(true)
   categoryId  String
   brandId     String
@@ -112,6 +119,8 @@ model Promotion {
   title       String
   description String?
   discount    Float
+  ctaText     String?
+  ctaUrl      String?
   active      Boolean  @default(true)
   startDate   DateTime
   endDate     DateTime
@@ -120,29 +129,31 @@ model Promotion {
 }
 
 model Coupon {
-  id          String   @id @default(cuid())
-  code        String   @unique
+  id          String    @id @default(cuid())
+  code        String    @unique
   discount    Float
-  type        String   @default("PERCENTAGE") // PERCENTAGE | FIXED
+  type        String    @default("PERCENTAGE")
   minAmount   Float?
   maxUses     Int?
-  usedCount   Int      @default(0)
-  active      Boolean  @default(true)
+  usedCount   Int       @default(0)
+  active      Boolean   @default(true)
   expiresAt   DateTime?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 model Banner {
-  id        String   @id @default(cuid())
-  title     String
-  subtitle  String?
-  image     String
-  link      String?
-  active    Boolean  @default(true)
-  order     Int      @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(cuid())
+  title       String
+  subtitle    String?
+  image       String
+  imageMobile String?
+  ctaText     String?
+  link        String?
+  active      Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Expense {
@@ -153,4 +164,56 @@ model Expense {
   date        DateTime
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+// ─── Nuevos modelos para homepage dinámica ──────────────────────────────────
+
+model HeroSlide {
+  id              String   @id @default(cuid())
+  title           String
+  subtitle        String?
+  description     String?
+  image           String?
+  imageMobile     String?
+  ctaPrimary      String?
+  ctaPrimaryUrl   String?
+  ctaSecondary    String?
+  ctaSecondaryUrl String?
+  order           Int      @default(0)
+  active          Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Benefit {
+  id          String   @id @default(cuid())
+  icon        String   // nombre del ícono (lucide) o SVG inline
+  title       String
+  description String?
+  order       Int      @default(0)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  comment   String
+  rating    Int      @default(5)
+  photo     String?
+  order     Int      @default(0)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Secciones singleton del sitio (about, instagram, final_message)
+// Se administran por clave única — upsert en lugar de create/delete
+model SiteSection {
+  id        String   @id @default(cuid())
+  key       String   @unique // 'about' | 'instagram' | 'final_message'
+  data      Json
+  active    Boolean  @default(true)
+  updatedAt DateTime @updatedAt
 }

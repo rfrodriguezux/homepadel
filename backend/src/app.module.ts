@@ -16,15 +16,15 @@ import { CouponsModule } from './coupons/coupons.module';
 import { BannersModule } from './banners/banners.module';
 import { UploadsModule } from './uploads/uploads.module';
 import { ExpensesModule } from './expenses/expenses.module';
+import { HeroSlidesModule } from './hero-slides/hero-slides.module';
+import { BenefitsModule } from './benefits/benefits.module';
+import { TestimonialsModule } from './testimonials/testimonials.module';
+import { SiteSectionsModule } from './site-sections/site-sections.module';
 
 @Module({
   imports: [
-    // Variables de entorno disponibles en toda la app
     ConfigModule.forRoot({ isGlobal: true }),
-
-    // Rate limiting: máx 100 requests por 60s por IP
     ThrottlerModule.forRoot([{ ttl: 60000, limit: 100 }]),
-
     PrismaModule,
     AuthModule,
     UsersModule,
@@ -37,6 +37,10 @@ import { ExpensesModule } from './expenses/expenses.module';
     BannersModule,
     UploadsModule,
     ExpensesModule,
+    HeroSlidesModule,
+    BenefitsModule,
+    TestimonialsModule,
+    SiteSectionsModule,
   ],
 })
 export class AppModule {}
