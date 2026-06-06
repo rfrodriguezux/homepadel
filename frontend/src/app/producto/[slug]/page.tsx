@@ -139,7 +139,7 @@ export default function ProductoPage() {
                     onClick={() => setSelectedImage(i)}
                     className={`w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${
                       selectedImage === i
-                        ? 'border-[#C8FF00]'
+                        ? 'border-[#D4FF00]'
                         : 'border-gray-200 hover:border-gray-400'
                     }`}
                   >
@@ -283,7 +283,7 @@ export default function ProductoPage() {
                   product.stock === 0
                     ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
                     : added
-                    ? 'bg-[#C8FF00] text-[#111]'
+                    ? 'bg-[#D4FF00] text-[#111]'
                     : 'bg-[#111] text-white hover:bg-[#222] active:scale-95'
                 }`}
               >

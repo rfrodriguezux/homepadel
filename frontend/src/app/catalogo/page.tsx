@@ -164,9 +164,9 @@ function CatalogoContent() {
                       params.set('page', '1');
                       router.push(`/catalogo?${params.toString()}`);
                     }}
-                    className="w-4 h-4 accent-[#C8FF00]"
+                    className="w-4 h-4 accent-[#D4FF00]"
                   />
-                  <span className="text-sm font-semibold text-[#C8FF00]">Solo ofertas</span>
+                  <span className="text-sm font-semibold text-[#D4FF00]">Solo ofertas</span>
                 </label>
               </div>
 
@@ -231,7 +231,7 @@ function CatalogoContent() {
                 <Filter size={16} />
                 Filtros
                 {hasFilters && (
-                  <span className="w-5 h-5 bg-[#C8FF00] text-[#111] rounded-full text-xs font-black flex items-center justify-center">
+                  <span className="w-5 h-5 bg-[#D4FF00] text-[#111] rounded-full text-xs font-black flex items-center justify-center">
                     {selectedCategories.length + selectedBrands.length + (isOffer ? 1 : 0)}
                   </span>
                 )}
@@ -263,7 +263,7 @@ function CatalogoContent() {
             {hasFilters && (
               <div className="flex flex-wrap gap-2 mb-4">
                 {isOffer && (
-                  <span className="flex items-center gap-1 bg-[#C8FF00] text-[#111] text-xs font-bold px-3 py-1 rounded-full">
+                  <span className="flex items-center gap-1 bg-[#D4FF00] text-[#111] text-xs font-bold px-3 py-1 rounded-full">
                     Ofertas
                     <button onClick={() => {
                       const params = new URLSearchParams(searchParams.toString());
@@ -402,9 +402,9 @@ function CatalogoContent() {
                     router.push(`/catalogo?${params.toString()}`);
                     setSidebarOpen(false);
                   }}
-                  className="w-4 h-4 accent-[#C8FF00]"
+                  className="w-4 h-4 accent-[#D4FF00]"
                 />
-                <span className="font-semibold text-[#C8FF00]">Solo ofertas</span>
+                <span className="font-semibold text-[#D4FF00]">Solo ofertas</span>
               </label>
             </div>
 

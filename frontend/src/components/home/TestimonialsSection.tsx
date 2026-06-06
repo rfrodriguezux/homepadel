@@ -43,7 +43,7 @@ export default function TestimonialsSection({ testimonials }: Props) {
         {/* Encabezado */}
         <div className="flex items-center justify-between mb-10">
           <div className="flex items-center gap-3">
-            <span className="w-1 h-7 bg-[#C8FF00] rounded-full flex-none" />
+            <span className="w-1 h-7 bg-[#D4FF00] rounded-full flex-none" />
             <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-white">
               LO QUE DICEN NUESTROS CLIENTES
             </h2>
@@ -81,7 +81,7 @@ export default function TestimonialsSection({ testimonials }: Props) {
                   />
                 ) : (
                   <div className="w-10 h-10 rounded-full bg-[#1a1a1a] border border-white/10 flex items-center justify-center flex-none">
-                    <span className="text-[#C8FF00] font-black text-xs">
+                    <span className="text-[#D4FF00] font-black text-xs">
                       {t.name.slice(0, 2).toUpperCase()}
                     </span>
                   </div>
@@ -103,7 +103,7 @@ export default function TestimonialsSection({ testimonials }: Props) {
                 key={i}
                 onClick={() => setCurrent(i)}
                 className={`rounded-full transition-all duration-300 ${
-                  i === current ? 'w-5 h-1.5 bg-[#C8FF00]' : 'w-1.5 h-1.5 bg-white/20 hover:bg-white/40'
+                  i === current ? 'w-5 h-1.5 bg-[#D4FF00]' : 'w-1.5 h-1.5 bg-white/20 hover:bg-white/40'
                 }`}
                 aria-label={`Ir al testimonio ${i + 1}`}
               />

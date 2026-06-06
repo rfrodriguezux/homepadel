@@ -6,7 +6,7 @@ import { Instagram, Facebook, Youtube } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#111] text-white">
+    <footer className="bg-[#050505] text-white border-t border-white/[0.06]">
       {/* ── Contenido principal ─────────────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-4 py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10">
@@ -21,23 +21,23 @@ export default function Footer() {
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
               >
-                <circle cx="16" cy="16" r="15" fill="#C8FF00" />
+                <circle cx="16" cy="16" r="15" fill="#D4FF00" />
                 <circle cx="16" cy="16" r="11" fill="#111" />
                 <path
                   d="M10 16 Q13 10 16 16 Q19 22 22 16"
-                  stroke="#C8FF00"
+                  stroke="#D4FF00"
                   strokeWidth="1.5"
                   fill="none"
                 />
                 <path
                   d="M10 16 Q13 22 16 16 Q19 10 22 16"
-                  stroke="#C8FF00"
+                  stroke="#D4FF00"
                   strokeWidth="1.5"
                   fill="none"
                 />
               </svg>
               <span className="font-black text-xl tracking-tight text-white leading-none">
-                HOME<span className="text-[#C8FF00]">.</span>PÁDEL
+                HOME<span className="text-[#D4FF00]">.</span>PÁDEL
               </span>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
@@ -50,7 +50,7 @@ export default function Footer() {
                 href="https://instagram.com/homepadel"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#C8FF00] hover:text-black flex items-center justify-center transition-colors"
+                className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#D4FF00] hover:text-black flex items-center justify-center transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram size={16} />
@@ -59,7 +59,7 @@ export default function Footer() {
                 href="https://facebook.com/homepadel"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#C8FF00] hover:text-black flex items-center justify-center transition-colors"
+                className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#D4FF00] hover:text-black flex items-center justify-center transition-colors"
                 aria-label="Facebook"
               >
                 <Facebook size={16} />
@@ -68,7 +68,7 @@ export default function Footer() {
                 href="https://tiktok.com/@homepadel"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#C8FF00] hover:text-black flex items-center justify-center transition-colors"
+                className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#D4FF00] hover:text-black flex items-center justify-center transition-colors"
                 aria-label="TikTok"
               >
                 {/* TikTok icon (Lucide no tiene, usamos SVG simple) */}
@@ -85,7 +85,7 @@ export default function Footer() {
                 href="https://youtube.com/@homepadel"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#C8FF00] hover:text-black flex items-center justify-center transition-colors"
+                className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#D4FF00] hover:text-black flex items-center justify-center transition-colors"
                 aria-label="YouTube"
               >
                 <Youtube size={16} />
@@ -109,7 +109,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 text-sm hover:text-[#C8FF00] transition-colors"
+                    className="text-gray-400 text-sm hover:text-[#D4FF00] transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -134,7 +134,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 text-sm hover:text-[#C8FF00] transition-colors"
+                    className="text-gray-400 text-sm hover:text-[#D4FF00] transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -150,7 +150,7 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3">
               <li className="flex items-start gap-2">
-                <span className="text-[#C8FF00] mt-0.5">✉</span>
+                <span className="text-[#D4FF00] mt-0.5">✉</span>
                 <a
                   href="mailto:info@homepadel.com"
                   className="text-gray-400 text-sm hover:text-white transition-colors"
@@ -159,7 +159,7 @@ export default function Footer() {
                 </a>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-[#C8FF00] mt-0.5">✆</span>
+                <span className="text-[#D4FF00] mt-0.5">✆</span>
                 <a
                   href="tel:+541172345678"
                   className="text-gray-400 text-sm hover:text-white transition-colors"
@@ -168,7 +168,7 @@ export default function Footer() {
                 </a>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-[#C8FF00] mt-0.5">◷</span>
+                <span className="text-[#D4FF00] mt-0.5">◷</span>
                 <span className="text-gray-400 text-sm">
                   Lunes a Viernes
                   <br />9 a 18 hs
@@ -192,7 +192,7 @@ export default function Footer() {
                 </span>
               ))}
             </div>
-            <p className="text-[#C8FF00] text-xs font-semibold">
+            <p className="text-[#D4FF00] text-xs font-semibold">
               Hasta 6 cuotas sin interés
             </p>
             <p className="text-gray-400 text-xs mt-1">en todos los productos</p>

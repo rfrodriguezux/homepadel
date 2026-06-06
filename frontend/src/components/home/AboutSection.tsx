@@ -3,18 +3,18 @@ import { AboutSection as AboutData } from '@/types';
 import { getImageUrl } from '@/lib/utils';
 
 const ICON_MAP: Record<string, React.ReactNode> = {
-  Heart:  <Heart  size={18} strokeWidth={1.5} />,
-  Users:  <Users  size={18} strokeWidth={1.5} />,
-  Shield: <Shield size={18} strokeWidth={1.5} />,
+  Heart:  <Heart  size={20} strokeWidth={1.5} />,
+  Users:  <Users  size={20} strokeWidth={1.5} />,
+  Shield: <Shield size={20} strokeWidth={1.5} />,
 };
 
 const FALLBACK: AboutData = {
   title: 'Somos Home Pádel',
   description: 'Vivimos el pádel tanto como vos. Seleccionamos los mejores productos para que solo te enfoques en jugar tu mejor partido.',
   benefits: [
-    { icon: 'Heart',  title: 'Pasión por el pádel',       description: 'Somos jugadores antes que vendedores' },
-    { icon: 'Users',  title: 'Atención personalizada',     description: 'Te asesoramos según tu nivel y estilo' },
-    { icon: 'Shield', title: 'Experiencia y confianza',    description: 'Años en el mercado del pádel argentino' },
+    { icon: 'Heart',  title: 'Pasión por el pádel',    description: 'Somos jugadores antes que vendedores' },
+    { icon: 'Users',  title: 'Atención personalizada',  description: 'Te asesoramos según tu nivel y estilo' },
+    { icon: 'Shield', title: 'Experiencia y confianza', description: 'Años en el mercado del pádel argentino' },
   ],
 };
 
@@ -22,15 +22,14 @@ interface Props {
   data?: AboutData | null;
 }
 
-// Renderiza el título coloreando "Home Pádel" en lime
+/** Renderiza el título con "Home Pádel" en acento lime */
 function AboutTitle({ title }: { title: string }) {
-  // Busca "Home Pádel" (case-insensitive) y colorea esa parte
   const match = title.match(/^(.*?)(Home Pádel|HOME PÁDEL)(.*)$/i);
   if (match) {
     return (
       <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight leading-tight">
         <span className="text-white">{match[1].toUpperCase()}</span>
-        <span className="text-[#C8FF00]">{match[2].toUpperCase()}</span>
+        <span className="text-[#D4FF00]">{match[2].toUpperCase()}</span>
         <span className="text-white">{match[3].toUpperCase()}</span>
       </h2>
     );
@@ -47,52 +46,61 @@ export default function AboutSection({ data }: Props) {
   const imageUrl = about.image ? getImageUrl(about.image) : null;
 
   return (
-    <section className="bg-[#111] border-t border-white/5 py-16">
+    <section className="bg-[#0A0A0A] border-t border-white/[0.06] py-14">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
-          {/* Texto */}
+          {/* ── Texto ── */}
           <div>
             <AboutTitle title={about.title} />
-
-            <p className="text-gray-500 text-sm leading-relaxed mt-4 mb-8">
+            <p className="text-[#A1A1AA] text-sm leading-relaxed mt-4 mb-8 max-w-md">
               {about.description}
             </p>
 
-            <div className="flex flex-col gap-5">
+            {/* Beneficios en FILA HORIZONTAL (como el mockup) */}
+            <div className="flex flex-col sm:flex-row gap-6">
               {about.benefits.map((b, i) => (
-                <div key={i} className="flex items-start gap-4">
-                  <div className="w-9 h-9 rounded-lg bg-[#C8FF00]/8 border border-[#C8FF00]/15 flex items-center justify-center text-[#C8FF00] flex-none">
-                    {ICON_MAP[b.icon] ?? <Shield size={18} strokeWidth={1.5} />}
+                <div key={i} className="flex flex-col items-start gap-2">
+                  <div className="w-9 h-9 rounded-lg bg-[#D4FF00]/[0.08] border border-[#D4FF00]/[0.12] flex items-center justify-center text-[#D4FF00] flex-none">
+                    {ICON_MAP[b.icon] ?? <Shield size={20} strokeWidth={1.5} />}
                   </div>
                   <div>
-                    <p className="text-white font-bold text-sm">{b.title}</p>
-                    <p className="text-gray-600 text-xs mt-0.5">{b.description}</p>
+                    <p className="text-white font-bold text-xs uppercase tracking-wide leading-snug">{b.title}</p>
+                    {b.description && (
+                      <p className="text-[#A1A1AA] text-xs mt-0.5 leading-snug">{b.description}</p>
+                    )}
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Imagen */}
-          <div className="flex items-center justify-center">
+          {/* ── Imagen ── */}
+          <div className="flex items-center justify-center relative">
             {imageUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={imageUrl}
                 alt={about.title}
-                className="rounded-2xl w-full max-w-md object-cover shadow-2xl"
+                className="rounded-xl w-full object-cover shadow-2xl"
               />
             ) : (
-              <div className="w-full max-w-md aspect-video rounded-2xl bg-[#1a1a1a] border border-white/8 flex flex-col items-center justify-center gap-3 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#C8FF00]/3 to-transparent" />
+              /* Placeholder — padel court oscuro */
+              <div className="w-full aspect-video rounded-xl bg-[#121212] border border-white/[0.08] flex flex-col items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#D4FF00]/[0.04] via-transparent to-transparent" />
+                {/* Court lines decorativas */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-10">
+                  <div className="w-3/4 h-2/3 border-2 border-white rounded-sm" />
+                  <div className="absolute w-3/4 h-px bg-white" />
+                </div>
+                {/* Badge HOME PÁDEL */}
                 <div className="relative z-10 flex flex-col items-center gap-2">
-                  <div className="w-16 h-16 rounded-xl bg-[#C8FF00]/8 border border-[#C8FF00]/15 flex items-center justify-center">
-                    <span className="text-[#C8FF00] font-black text-lg">HP</span>
-                  </div>
-                  <p className="text-gray-700 text-xs uppercase tracking-widest text-center max-w-[180px]">
-                    Subí una imagen desde el backoffice
-                  </p>
+                  <svg width="36" height="36" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                    <circle cx="16" cy="16" r="15" stroke="#D4FF00" strokeWidth="1.5"/>
+                    <path d="M4 16 Q10 8 16 16 Q22 24 28 16" stroke="#D4FF00" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+                    <path d="M4 16 Q10 24 16 16 Q22 8 28 16" stroke="#D4FF00" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+                  </svg>
+                  <span className="text-white font-black text-sm tracking-tight uppercase">HOME PÁDEL</span>
                 </div>
               </div>
             )}

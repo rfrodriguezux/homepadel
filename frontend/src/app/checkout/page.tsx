@@ -143,7 +143,7 @@ export default function CheckoutPage() {
           </div>
           <h1 className="text-2xl font-black text-[#111] mb-2">¡Pedido confirmado!</h1>
           <p className="text-gray-500 text-sm mb-1">Número de orden:</p>
-          <p className="text-2xl font-black text-[#C8FF00] bg-[#111] px-4 py-2 rounded-lg mb-5 inline-block">
+          <p className="text-2xl font-black text-[#D4FF00] bg-[#111] px-4 py-2 rounded-lg mb-5 inline-block">
             #{orderNumber}
           </p>
           <p className="text-gray-500 text-sm mb-8">
@@ -192,7 +192,7 @@ export default function CheckoutPage() {
               {/* Datos personales */}
               <div className="bg-white rounded-2xl border border-gray-200 p-6">
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="w-8 h-8 bg-[#C8FF00] rounded-full flex items-center justify-center text-[#111] font-black text-sm">
+                  <div className="w-8 h-8 bg-[#D4FF00] rounded-full flex items-center justify-center text-[#111] font-black text-sm">
                     1
                   </div>
                   <h2 className="font-black text-base uppercase tracking-wide flex items-center gap-2">
@@ -258,7 +258,7 @@ export default function CheckoutPage() {
               {/* Dirección de envío */}
               <div className="bg-white rounded-2xl border border-gray-200 p-6">
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="w-8 h-8 bg-[#C8FF00] rounded-full flex items-center justify-center text-[#111] font-black text-sm">
+                  <div className="w-8 h-8 bg-[#D4FF00] rounded-full flex items-center justify-center text-[#111] font-black text-sm">
                     2
                   </div>
                   <h2 className="font-black text-base uppercase tracking-wide flex items-center gap-2">
@@ -344,7 +344,7 @@ export default function CheckoutPage() {
               {/* Método de pago */}
               <div className="bg-white rounded-2xl border border-gray-200 p-6">
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="w-8 h-8 bg-[#C8FF00] rounded-full flex items-center justify-center text-[#111] font-black text-sm">
+                  <div className="w-8 h-8 bg-[#D4FF00] rounded-full flex items-center justify-center text-[#111] font-black text-sm">
                     3
                   </div>
                   <h2 className="font-black text-base uppercase tracking-wide flex items-center gap-2">
@@ -356,7 +356,7 @@ export default function CheckoutPage() {
                 <div className="space-y-3">
                   {/* Tarjeta de crédito/débito */}
                   <label className={`flex items-center gap-3 border-2 rounded-xl p-4 cursor-pointer transition-colors ${
-                    selectedPayment === 'card' ? 'border-[#C8FF00] bg-[#C8FF00]/5' : 'border-gray-200 hover:border-gray-300'
+                    selectedPayment === 'card' ? 'border-[#D4FF00] bg-[#D4FF00]/5' : 'border-gray-200 hover:border-gray-300'
                   }`}>
                     <input
                       {...register('paymentMethod')}
@@ -365,10 +365,10 @@ export default function CheckoutPage() {
                       className="sr-only"
                     />
                     <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                      selectedPayment === 'card' ? 'border-[#C8FF00]' : 'border-gray-300'
+                      selectedPayment === 'card' ? 'border-[#D4FF00]' : 'border-gray-300'
                     }`}>
                       {selectedPayment === 'card' && (
-                        <div className="w-2.5 h-2.5 rounded-full bg-[#C8FF00]" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#D4FF00]" />
                       )}
                     </div>
                     <div className="flex-1">
@@ -386,7 +386,7 @@ export default function CheckoutPage() {
 
                   {/* Mercado Pago */}
                   <label className={`flex items-center gap-3 border-2 rounded-xl p-4 cursor-pointer transition-colors ${
-                    selectedPayment === 'mercadopago' ? 'border-[#C8FF00] bg-[#C8FF00]/5' : 'border-gray-200 hover:border-gray-300'
+                    selectedPayment === 'mercadopago' ? 'border-[#D4FF00] bg-[#D4FF00]/5' : 'border-gray-200 hover:border-gray-300'
                   }`}>
                     <input
                       {...register('paymentMethod')}
@@ -395,10 +395,10 @@ export default function CheckoutPage() {
                       className="sr-only"
                     />
                     <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                      selectedPayment === 'mercadopago' ? 'border-[#C8FF00]' : 'border-gray-300'
+                      selectedPayment === 'mercadopago' ? 'border-[#D4FF00]' : 'border-gray-300'
                     }`}>
                       {selectedPayment === 'mercadopago' && (
-                        <div className="w-2.5 h-2.5 rounded-full bg-[#C8FF00]" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#D4FF00]" />
                       )}
                     </div>
                     <div className="flex-1">
@@ -410,7 +410,7 @@ export default function CheckoutPage() {
 
                   {/* Transferencia */}
                   <label className={`flex items-center gap-3 border-2 rounded-xl p-4 cursor-pointer transition-colors ${
-                    selectedPayment === 'transfer' ? 'border-[#C8FF00] bg-[#C8FF00]/5' : 'border-gray-200 hover:border-gray-300'
+                    selectedPayment === 'transfer' ? 'border-[#D4FF00] bg-[#D4FF00]/5' : 'border-gray-200 hover:border-gray-300'
                   }`}>
                     <input
                       {...register('paymentMethod')}
@@ -419,10 +419,10 @@ export default function CheckoutPage() {
                       className="sr-only"
                     />
                     <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                      selectedPayment === 'transfer' ? 'border-[#C8FF00]' : 'border-gray-300'
+                      selectedPayment === 'transfer' ? 'border-[#D4FF00]' : 'border-gray-300'
                     }`}>
                       {selectedPayment === 'transfer' && (
-                        <div className="w-2.5 h-2.5 rounded-full bg-[#C8FF00]" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#D4FF00]" />
                       )}
                     </div>
                     <div>
@@ -498,7 +498,7 @@ export default function CheckoutPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="mt-5 w-full flex items-center justify-center gap-2 bg-[#C8FF00] text-[#111] py-4 rounded-xl font-black text-sm uppercase tracking-wider hover:bg-[#111] hover:text-white transition-colors duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="mt-5 w-full flex items-center justify-center gap-2 bg-[#D4FF00] text-[#111] py-4 rounded-xl font-black text-sm uppercase tracking-wider hover:bg-[#111] hover:text-white transition-colors duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     'Procesando...'

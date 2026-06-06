@@ -13,7 +13,7 @@ function PadelBallIcon() {
       viewBox="0 0 48 48"
       fill="none"
       aria-hidden="true"
-      className="text-[#C8FF00]"
+      className="text-[#D4FF00]"
     >
       <circle cx="24" cy="24" r="20" stroke="currentColor" strokeWidth="2.5" />
       <path
@@ -52,7 +52,7 @@ export default function FinalMessage({ data }: Props) {
         </div>
 
         {/* Eyebrow */}
-        <p className="text-[#C8FF00] text-xs font-black uppercase tracking-[0.3em]">
+        <p className="text-[#D4FF00] text-xs font-black uppercase tracking-[0.3em]">
           Home Pádel
         </p>
 
@@ -62,7 +62,7 @@ export default function FinalMessage({ data }: Props) {
         </h2>
 
         {/* Separador */}
-        <div className="w-12 h-0.5 bg-[#C8FF00]/40 rounded-full" />
+        <div className="w-12 h-0.5 bg-[#D4FF00]/40 rounded-full" />
 
         {/* Cuerpo */}
         {subtitle && (

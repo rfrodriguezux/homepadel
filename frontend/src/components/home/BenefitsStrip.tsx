@@ -33,7 +33,7 @@ export default function BenefitsStrip({ benefits }: Props) {
           {items.slice(0, 4).map((b) => (
             <div key={b.id} className="flex items-center gap-3 px-5 py-5">
               {/* Ícono simple, sin círculo */}
-              <span className="text-[#C8FF00] flex-none">
+              <span className="text-[#D4FF00] flex-none">
                 {ICON_MAP[b.icon] ?? <Shield size={20} strokeWidth={1.5} />}
               </span>
               <div>

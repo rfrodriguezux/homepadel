@@ -119,7 +119,7 @@ export default function CuentaPage() {
           {/* Header de cuenta */}
           <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-6 flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 bg-[#C8FF00] rounded-full flex items-center justify-center text-[#111] font-black text-xl">
+              <div className="w-14 h-14 bg-[#D4FF00] rounded-full flex items-center justify-center text-[#111] font-black text-xl">
                 {user.name.charAt(0).toUpperCase()}
               </div>
               <div>
@@ -148,7 +148,7 @@ export default function CuentaPage() {
               <a
                 key={item.label}
                 href={item.href}
-                className="bg-white rounded-xl border border-gray-200 p-4 flex flex-col items-center gap-2 text-center hover:border-[#C8FF00] hover:shadow-sm transition-all"
+                className="bg-white rounded-xl border border-gray-200 p-4 flex flex-col items-center gap-2 text-center hover:border-[#D4FF00] hover:shadow-sm transition-all"
               >
                 <item.icon size={22} className="text-gray-600" />
                 <span className="text-xs font-semibold text-gray-700">{item.label}</span>
@@ -176,7 +176,7 @@ export default function CuentaPage() {
                 <p className="text-gray-400 text-sm mb-5">¡Empezá a comprar ahora!</p>
                 <Link
                   href="/catalogo"
-                  className="inline-flex items-center gap-2 bg-[#C8FF00] text-[#111] px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-[#111] hover:text-white transition-colors"
+                  className="inline-flex items-center gap-2 bg-[#D4FF00] text-[#111] px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-[#111] hover:text-white transition-colors"
                 >
                   Ver catálogo
                   <ChevronRight size={14} />
@@ -257,11 +257,11 @@ export default function CuentaPage() {
           <div className="text-center mb-6">
             <Link href="/" className="inline-flex items-center gap-2">
               <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                <circle cx="16" cy="16" r="15" fill="#C8FF00" />
+                <circle cx="16" cy="16" r="15" fill="#D4FF00" />
                 <circle cx="16" cy="16" r="11" fill="#111" />
-                <path d="M10 16 Q13 10 16 16 Q19 22 22 16" stroke="#C8FF00" strokeWidth="1.5" fill="none" />
+                <path d="M10 16 Q13 10 16 16 Q19 22 22 16" stroke="#D4FF00" strokeWidth="1.5" fill="none" />
               </svg>
-              <span className="font-black text-lg text-[#111]">HOME<span className="text-[#C8FF00]">.</span>PÁDEL</span>
+              <span className="font-black text-lg text-[#111]">HOME<span className="text-[#D4FF00]">.</span>PÁDEL</span>
             </Link>
             <h1 className="text-xl font-black mt-3 text-[#111]">
               {isRegister ? 'Crear cuenta' : 'Bienvenido de vuelta'}
@@ -343,7 +343,7 @@ export default function CuentaPage() {
               <button
                 type="submit"
                 disabled={loginForm.formState.isSubmitting}
-                className="w-full bg-[#C8FF00] text-[#111] py-3.5 rounded-xl font-black text-sm uppercase tracking-wider hover:bg-[#111] hover:text-white transition-colors duration-200 disabled:opacity-70"
+                className="w-full bg-[#D4FF00] text-[#111] py-3.5 rounded-xl font-black text-sm uppercase tracking-wider hover:bg-[#111] hover:text-white transition-colors duration-200 disabled:opacity-70"
               >
                 {loginForm.formState.isSubmitting ? 'Ingresando...' : 'Iniciar sesión'}
               </button>
@@ -463,7 +463,7 @@ export default function CuentaPage() {
               <button
                 type="submit"
                 disabled={registerForm.formState.isSubmitting}
-                className="w-full bg-[#C8FF00] text-[#111] py-3.5 rounded-xl font-black text-sm uppercase tracking-wider hover:bg-[#111] hover:text-white transition-colors duration-200 disabled:opacity-70"
+                className="w-full bg-[#D4FF00] text-[#111] py-3.5 rounded-xl font-black text-sm uppercase tracking-wider hover:bg-[#111] hover:text-white transition-colors duration-200 disabled:opacity-70"
               >
                 {registerForm.formState.isSubmitting ? 'Creando cuenta...' : 'Crear cuenta'}
               </button>
@@ -476,7 +476,7 @@ export default function CuentaPage() {
               {isRegister ? '¿Ya tenés cuenta? ' : '¿No tenés cuenta? '}
               <button
                 onClick={() => { setIsRegister(!isRegister); setApiError(''); }}
-                className="text-[#111] font-bold hover:text-[#C8FF00] transition-colors"
+                className="text-[#111] font-bold hover:text-[#D4FF00] transition-colors"
               >
                 {isRegister ? 'Iniciá sesión' : 'Registrate gratis'}
               </button>

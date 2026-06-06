@@ -49,7 +49,7 @@ export default function CarritoPage() {
             </p>
             <Link
               href="/catalogo"
-              className="inline-flex items-center gap-2 bg-[#C8FF00] text-[#111] px-8 py-3.5 rounded-xl font-black text-sm uppercase tracking-wider hover:bg-[#111] hover:text-white transition-colors duration-200"
+              className="inline-flex items-center gap-2 bg-[#D4FF00] text-[#111] px-8 py-3.5 rounded-xl font-black text-sm uppercase tracking-wider hover:bg-[#111] hover:text-white transition-colors duration-200"
             >
               Ver catálogo
               <ArrowRight size={16} />
@@ -262,7 +262,7 @@ export default function CarritoPage() {
               {/* Botón finalizar compra */}
               <Link
                 href="/checkout"
-                className="w-full flex items-center justify-center gap-2 bg-[#C8FF00] text-[#111] py-4 rounded-xl font-black text-sm uppercase tracking-wider hover:bg-[#111] hover:text-white transition-colors duration-200"
+                className="w-full flex items-center justify-center gap-2 bg-[#D4FF00] text-[#111] py-4 rounded-xl font-black text-sm uppercase tracking-wider hover:bg-[#111] hover:text-white transition-colors duration-200"
               >
                 Finalizar compra
                 <ArrowRight size={16} />

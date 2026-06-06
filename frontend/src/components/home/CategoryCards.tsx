@@ -64,7 +64,7 @@ export default function CategoryCards({ categories }: Props) {
                   <p className="text-white font-black text-sm uppercase tracking-wide leading-none">
                     {cat.name.toUpperCase()}
                   </p>
-                  <p className="text-gray-500 text-[10px] font-medium mt-1 group-hover:text-[#C8FF00] transition-colors duration-200 flex items-center gap-1 uppercase tracking-wider">
+                  <p className="text-gray-500 text-[10px] font-medium mt-1 group-hover:text-[#D4FF00] transition-colors duration-200 flex items-center gap-1 uppercase tracking-wider">
                     VER PRODUCTOS
                     <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                       <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -73,7 +73,7 @@ export default function CategoryCards({ categories }: Props) {
                 </div>
 
                 {/* Borde lime animado */}
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#C8FF00] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#D4FF00] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
               </Link>
             );
           })}

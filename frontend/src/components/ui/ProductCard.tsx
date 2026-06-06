@@ -127,7 +127,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
             product.stock === 0
               ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
               : adding
-              ? 'bg-[#C8FF00] text-[#111] scale-95'
+              ? 'bg-[#D4FF00] text-[#111] scale-95'
               : 'bg-[#111] text-white hover:bg-[#222] active:scale-95'
           }`}
         >

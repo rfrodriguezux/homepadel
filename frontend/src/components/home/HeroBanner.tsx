@@ -37,9 +37,9 @@ function SlideContent({ slide }: { slide: HeroSlide }) {
           {slide.subtitle && (
             <div className="flex items-center gap-2">
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M2 8l5-5 7 7" stroke="#C8FF00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M2 8l5-5 7 7" stroke="#D4FF00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              <span className="text-[#C8FF00] text-xs font-bold uppercase tracking-[0.25em]">
+              <span className="text-[#D4FF00] text-xs font-bold uppercase tracking-[0.25em]">
                 {slide.subtitle}
               </span>
             </div>
@@ -51,7 +51,7 @@ function SlideContent({ slide }: { slide: HeroSlide }) {
                 {line}
               </span>
             ))}
-            <span className="text-[#C8FF00] block text-4xl md:text-5xl xl:text-6xl whitespace-nowrap">
+            <span className="text-[#D4FF00] block text-4xl md:text-5xl xl:text-6xl whitespace-nowrap">
               {limeLine}
             </span>
           </h1>
@@ -66,7 +66,7 @@ function SlideContent({ slide }: { slide: HeroSlide }) {
             {slide.ctaPrimary && (
               <Link
                 href={slide.ctaPrimaryUrl || '/catalogo'}
-                className="inline-flex items-center gap-2 bg-[#C8FF00] text-[#111] px-7 py-3.5 font-black text-sm uppercase tracking-wider rounded hover:bg-white transition-colors duration-200"
+                className="inline-flex items-center gap-2 bg-[#D4FF00] text-[#111] px-7 py-3.5 font-black text-sm uppercase tracking-wider rounded hover:bg-white transition-colors duration-200"
               >
                 {slide.ctaPrimary}
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -90,7 +90,7 @@ function SlideContent({ slide }: { slide: HeroSlide }) {
           {/* Badge 9 cuotas */}
           <div className="absolute top-0 right-0 bg-[#1a1a1a] border border-white/10 rounded-xl p-4 text-right z-20">
             <p className="text-gray-500 text-[9px] uppercase tracking-widest leading-none mb-0.5">HASTA</p>
-            <p className="text-[#C8FF00] font-black text-5xl leading-none">9</p>
+            <p className="text-[#D4FF00] font-black text-5xl leading-none">9</p>
             <p className="text-white font-black text-[10px] uppercase tracking-widest leading-tight mt-1">CUOTAS<br/>SIN INTERÉS</p>
             <div className="flex justify-end gap-1 mt-2">
               <div className="w-5 h-3 bg-gray-700 rounded-sm" />
@@ -107,8 +107,8 @@ function SlideContent({ slide }: { slide: HeroSlide }) {
             />
           ) : (
             <div className="relative z-10 w-72 h-[360px] rounded-2xl bg-[#1a1a1a] border border-white/10 flex flex-col items-center justify-center gap-4 mt-10">
-              <div className="w-20 h-20 rounded-full bg-[#C8FF00]/10 border border-[#C8FF00]/20 flex items-center justify-center">
-                <span className="text-[#C8FF00] font-black text-xl">HP</span>
+              <div className="w-20 h-20 rounded-full bg-[#D4FF00]/10 border border-[#D4FF00]/20 flex items-center justify-center">
+                <span className="text-[#D4FF00] font-black text-xl">HP</span>
               </div>
               <p className="text-gray-600 text-xs uppercase tracking-widest text-center px-8">
                 Subí una imagen desde el backoffice
@@ -190,7 +190,7 @@ export default function HeroBanner({ slides }: Props) {
                 key={i}
                 onClick={() => setCurrent(i)}
                 className={`rounded-full transition-all duration-300 ${
-                  i === current ? 'w-5 h-1.5 bg-[#C8FF00]' : 'w-1.5 h-1.5 bg-white/25 hover:bg-white/50'
+                  i === current ? 'w-5 h-1.5 bg-[#D4FF00]' : 'w-1.5 h-1.5 bg-white/25 hover:bg-white/50'
                 }`}
                 aria-label={`Ir al slide ${i + 1}`}
               />

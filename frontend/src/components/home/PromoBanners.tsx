@@ -70,7 +70,7 @@ export default function PromoBanners({ banners }: Props) {
 
                 {/* Contenido */}
                 <div className="relative z-10">
-                  <p className="text-[#C8FF00] text-[10px] font-black uppercase tracking-[0.25em] mb-2">
+                  <p className="text-[#D4FF00] text-[10px] font-black uppercase tracking-[0.25em] mb-2">
                     {item.tag}
                   </p>
                   <h3 className="text-white font-black text-3xl md:text-4xl uppercase tracking-tight leading-none mb-5">

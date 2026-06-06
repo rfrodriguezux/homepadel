@@ -38,7 +38,7 @@ export default function InstagramSection({ config }: Props) {
         {/* Encabezado */}
         <div className="flex items-center justify-between mb-7">
           <div className="flex items-center gap-3">
-            <span className="w-1 h-7 bg-[#C8FF00] rounded-full" />
+            <span className="w-1 h-7 bg-[#D4FF00] rounded-full" />
             <h2 className="text-2xl font-black uppercase tracking-tight text-white">
               {ig.title}
             </h2>

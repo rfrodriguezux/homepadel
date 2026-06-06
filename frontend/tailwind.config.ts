@@ -7,11 +7,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        lime: { DEFAULT: '#C8FF00', dark: '#a8d600' },
+        accent: '#D4FF00',
+        lime:   { DEFAULT: '#D4FF00', dark: '#b8e000' },
         brand: {
-          dark: '#111111',
-          darker: '#0a0a0a',
-          gray: '#1c1c1c',
+          dark:   '#101010',
+          darker: '#0A0A0A',
+          base:   '#050505',
+          surface:'#121212',
+          gray:   '#1c1c1c',
         },
       },
       fontFamily: {

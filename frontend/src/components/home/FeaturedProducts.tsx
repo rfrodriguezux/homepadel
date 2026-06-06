@@ -64,7 +64,7 @@ function ProductCard({ product }: { product: Product }) {
             </span>
           )}
           {product.isNew && !hasDiscount && (
-            <span className="bg-[#C8FF00] text-[#111] text-xs font-black px-2 py-0.5 rounded-full">
+            <span className="bg-[#D4FF00] text-[#111] text-xs font-black px-2 py-0.5 rounded-full">
               NUEVO
             </span>
           )}
@@ -117,7 +117,7 @@ function ProductCard({ product }: { product: Product }) {
 
         {/* Cuotas */}
         {product.price >= 10000 && (
-          <p className="text-xs text-[#C8FF00] font-medium">
+          <p className="text-xs text-[#D4FF00] font-medium">
             Hasta 9 cuotas sin interés
           </p>
         )}
@@ -129,8 +129,8 @@ function ProductCard({ product }: { product: Product }) {
             product.stock === 0
               ? 'bg-white/5 text-gray-600 cursor-not-allowed'
               : adding
-              ? 'bg-[#C8FF00] text-[#111] scale-95'
-              : 'bg-[#111] border border-white/10 text-white hover:border-[#C8FF00] hover:text-[#C8FF00]'
+              ? 'bg-[#D4FF00] text-[#111] scale-95'
+              : 'bg-[#111] border border-white/10 text-white hover:border-[#D4FF00] hover:text-[#D4FF00]'
           }`}
         >
           <ShoppingCart size={13} />
