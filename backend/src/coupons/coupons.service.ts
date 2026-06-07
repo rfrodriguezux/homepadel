@@ -5,6 +5,13 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 
+function normalizeDto(dto: any): any {
+  const { isActive, expiresAt, ...rest } = dto;
+  if (isActive !== undefined) rest.active = isActive;
+  if (expiresAt) rest.expiresAt = new Date(expiresAt);
+  return rest;
+}
+
 @Injectable()
 export class CouponsService {
   constructor(private prisma: PrismaService) {}
@@ -19,12 +26,12 @@ export class CouponsService {
     return coupon;
   }
 
-  create(dto: any) { return this.prisma.coupon.create({ data: dto }); }
+  create(dto: any) { return this.prisma.coupon.create({ data: normalizeDto(dto) }); }
 
   async update(id: string, dto: any) {
     const c = await this.prisma.coupon.findUnique({ where: { id } });
     if (!c) throw new NotFoundException('Cupón no encontrado');
-    return this.prisma.coupon.update({ where: { id }, data: dto });
+    return this.prisma.coupon.update({ where: { id }, data: normalizeDto(dto) });
   }
 
   async remove(id: string) {

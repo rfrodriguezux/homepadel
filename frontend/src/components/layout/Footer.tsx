@@ -126,7 +126,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {[
                 { label: 'Preguntas frecuentes', href: '/faq' },
-                { label: 'Cambios y devoluciones', href: '/cambios' },
+                { label: 'Cambios y devoluciones', href: '/politica-de-devolucion' },
                 { label: 'Envíos', href: '/envios' },
                 { label: 'Medios de pago', href: '/medios-de-pago' },
                 { label: 'Guía de talles', href: '/talles' },

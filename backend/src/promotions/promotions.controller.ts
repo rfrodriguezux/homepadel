@@ -2,9 +2,10 @@
 // GET    /api/promotions        — listar todas (público)
 // POST   /api/promotions        — crear (ADMIN)
 // PATCH  /api/promotions/:id    — actualizar (ADMIN)
+// PUT    /api/promotions/:id    — actualizar (ADMIN, alias para compatibilidad con backoffice)
 // DELETE /api/promotions/:id    — eliminar (ADMIN)
 
-import { Controller, Get, Post, Patch, Delete, Param, Body, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Put, Delete, Param, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { PromotionsService } from './promotions.service';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
@@ -24,6 +25,7 @@ export class PromotionsController {
   create(@Body() dto: any) { return this.promotionsService.create(dto); }
 
   @Patch(':id')
+  @Put(':id')
   @ApiBearerAuth() @UseGuards(JwtAuthGuard, RolesGuard) @Roles(Role.ADMIN)
   update(@Param('id') id: string, @Body() dto: any) { return this.promotionsService.update(id, dto); }
 
