@@ -50,9 +50,10 @@ export class ProductsService {
     });
   }
 
-  async findBySlug(slug: string) {
-    const product = await this.prisma.product.findUnique({
-      where: { slug },
+  async findBySlug(slugOrId: string) {
+    // Busca por slug primero; si no existe, intenta por ID (uso del backoffice)
+    const product = await this.prisma.product.findFirst({
+      where: { OR: [{ slug: slugOrId }, { id: slugOrId }] },
       include: { category: true, brand: true },
     });
     if (!product) throw new NotFoundException('Producto no encontrado');
@@ -60,8 +61,14 @@ export class ProductsService {
   }
 
   create(dto: CreateProductDto) {
-    const slug = slugify(dto.name, { lower: true, strict: true });
-    return this.prisma.product.create({ data: { ...dto, slug }, include: { category: true, brand: true } });
+    const { categoryId, brandId, ...rest } = dto as any;
+    if (!categoryId) throw new NotFoundException('categoryId es requerido');
+    if (!brandId)    throw new NotFoundException('brandId es requerido');
+    const slug = slugify(rest.name, { lower: true, strict: true });
+    return this.prisma.product.create({
+      data: { ...rest, slug, categoryId, brandId },
+      include: { category: true, brand: true },
+    });
   }
 
   async update(id: string, dto: UpdateProductDto) {
