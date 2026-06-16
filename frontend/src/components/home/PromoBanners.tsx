@@ -11,9 +11,9 @@ const FALLBACK: Banner[] = [
     id: '1',
     title: 'NUEVA COLECCION 2026',
     subtitle: 'Zapatillas premium',
-    cta: 'VER COLECCION',
-    ctaUrl: '/catalogo?categoria=zapatillas',
-    image: null,
+    ctaText: 'VER COLECCION',
+    link: '/catalogo?categoria=zapatillas',
+    image: '',
     order: 0,
     active: true,
   },
@@ -21,9 +21,9 @@ const FALLBACK: Banner[] = [
     id: '2',
     title: 'HASTA 40% OFF',
     subtitle: 'Indumentaria temporada anterior',
-    cta: 'VER OFERTAS',
-    ctaUrl: '/catalogo?oferta=true',
-    image: null,
+    ctaText: 'VER OFERTAS',
+    link: '/catalogo?oferta=true',
+    image: '',
     order: 1,
     active: true,
   },
@@ -65,12 +65,12 @@ export default function PromoBanners({ banners }: Props) {
                   <h3 className="text-2xl md:text-3xl font-bold text-[#F7F6F7] uppercase leading-tight">
                     {banner.title}
                   </h3>
-                  {banner.cta && (
+                  {banner.ctaText && (
                     <Link
-                      href={banner.ctaUrl || '/catalogo'}
+                      href={banner.link || '/catalogo'}
                       className="inline-flex items-center gap-2 mt-2 px-6 py-2.5 rounded-lg text-sm font-semibold uppercase tracking-wide transition-all duration-200 bg-[#0A2D3D] text-[#F7F6F7] hover:bg-[#0D3D52] hover:translate-y-[-2px]"
                     >
-                      {banner.cta}
+                      {banner.ctaText}
                       <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                         <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>

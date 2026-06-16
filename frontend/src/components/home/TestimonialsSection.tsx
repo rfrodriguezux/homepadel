@@ -7,9 +7,9 @@ interface Props {
 }
 
 const PLACEHOLDER: Testimonial[] = [
-  { id: '1', name: 'Martin G.', comment: 'Excelente atencion y productos de primera calidad. La paleta que compre supero mis expectativas.', rating: 5 },
-  { id: '2', name: 'Lucia R.', comment: 'El envio fue rapidisimo y el asesoramiento por WhatsApp me ayudo a elegir la paleta ideal para mi nivel.', rating: 5 },
-  { id: '3', name: 'Diego P.', comment: 'Los mejores precios del mercado. Compre mis zapatillas Bullpadel y llegaron en 48 horas.', rating: 5 },
+  { id: '1', name: 'Martin G.', comment: 'Excelente atencion y productos de primera calidad. La paleta que compre supero mis expectativas.', rating: 5, order: 0, active: true },
+  { id: '2', name: 'Lucia R.', comment: 'El envio fue rapidisimo y el asesoramiento por WhatsApp me ayudo a elegir la paleta ideal para mi nivel.', rating: 5, order: 1, active: true },
+  { id: '3', name: 'Diego P.', comment: 'Los mejores precios del mercado. Compre mis zapatillas Bullpadel y llegaron en 48 horas.', rating: 5, order: 2, active: true },
 ];
 
 export default function TestimonialsSection({ testimonials }: Props) {

@@ -10,6 +10,11 @@ const FALLBACK: AboutData = {
   title: 'SOMOS HOME PADEL',
   description: 'En Home Padel somos apasionados por este deporte. Ofrecemos las mejores marcas con atencion personalizada y envios a todo el pais.',
   image: undefined,
+  benefits: [
+    { icon: 'truck', title: 'Envios a todo el pais', description: 'Llegamos a cada rincon del pais' },
+    { icon: 'shield', title: 'Productos originales', description: 'Garantia oficial de fabrica' },
+    { icon: 'users', title: 'Atencion personalizada', description: 'Te asesoramos en tu compra' },
+  ],
 };
 
 const FEATURES = [
