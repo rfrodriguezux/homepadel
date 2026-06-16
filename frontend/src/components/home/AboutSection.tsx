@@ -1,107 +1,68 @@
-import { Heart, Users, Shield } from 'lucide-react';
 import { AboutSection as AboutData } from '@/types';
 import { getImageUrl } from '@/lib/utils';
-import BrandLogo from '@/components/ui/BrandLogo';
+import { Truck, Shield, Users } from 'lucide-react';
 
-const ICON_MAP: Record<string, React.ReactNode> = {
-  Heart:  <Heart  size={20} strokeWidth={1.5} />,
-  Users:  <Users  size={20} strokeWidth={1.5} />,
-  Shield: <Shield size={20} strokeWidth={1.5} />,
-};
+interface Props {
+  data: AboutData | null;
+}
 
 const FALLBACK: AboutData = {
-  title: 'Somos Home Pádel',
-  description: 'Vivimos el pádel tanto como vos. Seleccionamos los mejores productos para que solo te enfoques en jugar tu mejor partido.',
+  title: 'SOMOS HOME PADEL',
+  description: 'En Home Padel somos apasionados por este deporte. Ofrecemos las mejores marcas con atencion personalizada y envios a todo el pais.',
+  image: undefined,
   benefits: [
-    { icon: 'Heart',  title: 'Pasión por el pádel',    description: 'Somos jugadores antes que vendedores' },
-    { icon: 'Users',  title: 'Atención personalizada',  description: 'Te asesoramos según tu nivel y estilo' },
-    { icon: 'Shield', title: 'Experiencia y confianza', description: 'Años en el mercado del pádel argentino' },
+    { icon: 'truck', title: 'Envios a todo el pais', description: 'Llegamos a cada rincon del pais' },
+    { icon: 'shield', title: 'Productos originales', description: 'Garantia oficial de fabrica' },
+    { icon: 'users', title: 'Atencion personalizada', description: 'Te asesoramos en tu compra' },
   ],
 };
 
-interface Props {
-  data?: AboutData | null;
-}
-
-/** Renderiza el título con "Home Pádel" en acento lime */
-function AboutTitle({ title }: { title: string }) {
-  const match = title.match(/^(.*?)(Home Pádel|HOME PÁDEL)(.*)$/i);
-  if (match) {
-    return (
-      <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight leading-tight">
-        <span className="text-white">{match[1].toUpperCase()}</span>
-        <span className="text-[#D4FF00]">{match[2].toUpperCase()}</span>
-        <span className="text-white">{match[3].toUpperCase()}</span>
-      </h2>
-    );
-  }
-  return (
-    <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-white leading-tight">
-      {title.toUpperCase()}
-    </h2>
-  );
-}
+const FEATURES = [
+  { icon: <Truck size={20} />, text: 'Envios a todo el pais' },
+  { icon: <Shield size={20} />, text: 'Productos originales' },
+  { icon: <Users size={20} />, text: 'Atencion personalizada' },
+];
 
 export default function AboutSection({ data }: Props) {
-  const about = data ?? FALLBACK;
-  const imageUrl = about.image ? getImageUrl(about.image) : null;
+  const d = data || FALLBACK;
+  const bgImage = d.image ? getImageUrl(d.image) : null;
 
   return (
-    <section className="bg-[#0A0A0A] border-t border-white/[0.06] py-14">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    <section className="section-gradient relative bg-[#061E29] overflow-hidden py-16 md:py-20">
+      {/* Imagen de fondo full-width */}
+      {bgImage ? (
+        <>
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: 'url(' + bgImage + ')' }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#061E29] via-[#061E29]/85 to-[#061E29]/40" />
+        </>
+      ) : (
+        <div className="absolute inset-0 bg-[#061E29]" />
+      )}
 
-          {/* ── Texto ── */}
-          <div>
-            <AboutTitle title={about.title} />
-            <p className="text-[#A1A1AA] text-sm leading-relaxed mt-4 mb-8 max-w-md">
-              {about.description}
-            </p>
+      {/* Contenido */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="max-w-2xl">
+          <h2 className="text-2xl md:text-3xl font-semibold uppercase tracking-tight text-[#F7F6F7] mb-4">
+            SOMOS <span className="text-[#B7D31A]">HOME PADEL</span>
+          </h2>
+          <p className="text-[#C7C7C0] text-sm md:text-base leading-relaxed mb-8">
+            {d.description}
+          </p>
 
-            {/* Beneficios en FILA HORIZONTAL (como el mockup) */}
-            <div className="flex flex-col sm:flex-row gap-6">
-              {about.benefits.map((b, i) => (
-                <div key={i} className="flex flex-col items-start gap-2">
-                  <div className="w-9 h-9 rounded-lg bg-[#D4FF00]/[0.08] border border-[#D4FF00]/[0.12] flex items-center justify-center text-[#D4FF00] flex-none">
-                    {ICON_MAP[b.icon] ?? <Shield size={20} strokeWidth={1.5} />}
-                  </div>
-                  <div>
-                    <p className="text-white font-bold text-xs uppercase tracking-wide leading-snug">{b.title}</p>
-                    {b.description && (
-                      <p className="text-[#A1A1AA] text-xs mt-0.5 leading-snug">{b.description}</p>
-                    )}
-                  </div>
+          {/* 3 columnas con iconos */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {FEATURES.map((f, i) => (
+              <div key={i} className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-[#242A05] flex items-center justify-center flex-shrink-0">
+                  <span className="text-[#B7D31A]">{f.icon}</span>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* ── Imagen ── */}
-          <div className="flex items-center justify-center relative">
-            {imageUrl ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={imageUrl}
-                alt={about.title}
-                className="rounded-xl w-full object-cover shadow-2xl"
-              />
-            ) : (
-              /* Placeholder — padel court oscuro */
-              <div className="w-full aspect-video rounded-xl bg-[#121212] border border-white/[0.08] flex flex-col items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#D4FF00]/[0.04] via-transparent to-transparent" />
-                {/* Court lines decorativas */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-10">
-                  <div className="w-3/4 h-2/3 border-2 border-white rounded-sm" />
-                  <div className="absolute w-3/4 h-px bg-white" />
-                </div>
-                {/* Logo oficial como identidad visual */}
-                <div className="relative z-10">
-                  <BrandLogo variant="dark" size="sm" showText={true} />
-                </div>
+                <span className="text-[#C7C7C0] text-sm font-medium">{f.text}</span>
               </div>
-            )}
+            ))}
           </div>
-
         </div>
       </div>
     </section>
