@@ -110,3 +110,16 @@ h3, .h3 { font-weight: 500; }
 h4, .h4 { font-weight: 600; }
 p, a, li, span, input, textarea, select, label { font-weight: 400; }
 .font-semibold, .font-bold, .font-black { font-family: 'Poppins', system-ui, -apple-system, sans-serif; }
+/* Animacion scroll infinito para marcas */
+@keyframes scroll-brands {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll {
+  animation: scroll-brands 25s linear infinite;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
