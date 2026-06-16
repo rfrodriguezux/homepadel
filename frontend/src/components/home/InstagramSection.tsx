@@ -33,12 +33,12 @@ export default function InstagramSection({ config }: Props) {
   const ig = config ?? FALLBACK;
 
   return (
-    <section className="bg-[#111] border-t border-white/5 py-14">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="section-gradient bg-[#050606] border-t border-[#0D0F0F] py-14">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Encabezado */}
         <div className="flex items-center justify-between mb-7">
           <div className="flex items-center gap-3">
-            <span className="w-1 h-7 bg-[#D4FF00] rounded-full" />
+            <span className="w-1 h-7 bg-[#B7D31A] rounded-full" />
             <h2 className="text-2xl font-black uppercase tracking-tight text-white">
               {ig.title}
             </h2>
@@ -47,7 +47,7 @@ export default function InstagramSection({ config }: Props) {
             href={ig.buttonUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-bold text-white bg-white/10 border border-white/10 px-4 py-1.5 rounded-full hover:bg-white/20 transition-colors flex items-center gap-2"
+            className="text-sm font-bold text-white bg-white/10 border border-[#0D0F0F] px-4 py-1.5 rounded-full hover:bg-white/20 transition-colors flex items-center gap-2"
           >
             <InstagramIcon size={14} />
             {ig.username}

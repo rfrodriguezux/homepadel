@@ -100,11 +100,11 @@ const FAQS = [
 
 export default function FaqPage() {
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white">
+    <div className="min-h-screen bg-[#050606] text-white">
 
       {/* BREADCRUMB */}
       <div className="border-b border-white/[0.06]">
-        <div className="max-w-7xl mx-auto px-4 py-2.5 flex items-center gap-1.5 text-[11px] text-[#A1A1AA]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-2.5 flex items-center gap-1.5 text-[11px] text-[#A1A1AA]">
           <Link href="/" className="hover:text-white transition-colors">Inicio</Link>
           <span>/</span>
           <span className="text-white">Preguntas Frecuentes</span>
@@ -112,8 +112,8 @@ export default function FaqPage() {
       </div>
 
       {/* HERO */}
-      <section className="max-w-7xl mx-auto px-4 py-12 lg:py-16 text-center">
-        <p className="text-[#D4FF00] text-xs font-black uppercase tracking-[0.2em] mb-3">SOPORTE</p>
+      <section className="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-16 text-center">
+        <p className="text-[#B7D31A] text-xs font-black uppercase tracking-[0.2em] mb-3">SOPORTE</p>
         <h1 className="text-4xl md:text-5xl font-black text-white leading-tight mb-4">
           Preguntas Frecuentes
         </h1>
@@ -124,16 +124,16 @@ export default function FaqPage() {
       </section>
 
       {/* FAQs */}
-      <section className="max-w-4xl mx-auto px-4 pb-20">
+      <section className="max-w-4xl mx-auto px-6 lg:px-8 pb-20">
         {FAQS.map((section) => (
           <div key={section.category} className="mb-12">
-            <h2 className="text-xs font-black uppercase tracking-[0.2em] text-[#D4FF00] mb-5 flex items-center gap-2">
-              <span className="w-4 h-px bg-[#D4FF00]" />
+            <h2 className="text-xs font-black uppercase tracking-[0.2em] text-[#B7D31A] mb-5 flex items-center gap-2">
+              <span className="w-4 h-px bg-[#B7D31A]" />
               {section.category}
             </h2>
             <div className="space-y-3">
               {section.items.map((item, i) => (
-                <div key={i} className="bg-[#121212] border border-white/[0.08] rounded-2xl overflow-hidden">
+                <div key={i} className="bg-[#0C0C0C] border border-white/[0.08] rounded-2xl overflow-hidden">
                   <details className="group">
                     <summary className="flex items-center justify-between gap-4 px-6 py-4 cursor-pointer select-none list-none">
                       <span className="text-white font-semibold text-sm">{item.q}</span>
@@ -155,7 +155,7 @@ export default function FaqPage() {
 
       {/* CTA */}
       <section className="border-t border-white/[0.06] py-12 bg-[#050505]">
-        <div className="max-w-7xl mx-auto px-4 text-center">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <h3 className="text-white font-black text-xl mb-2">¿No encontraste lo que buscabas?</h3>
           <p className="text-[#A1A1AA] text-sm mb-6">Nuestro equipo está disponible de Lunes a Viernes de 9 a 18 hs.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -170,7 +170,7 @@ export default function FaqPage() {
             </a>
             <Link
               href="/contacto"
-              className="flex items-center gap-2 px-6 py-3 bg-[#1a1a1a] border border-white/20 text-white font-bold text-sm rounded-xl hover:border-white/40 transition-colors"
+              className="flex items-center gap-2 px-6 py-3 bg-[#0C0C0C] border border-white/20 text-white font-bold text-sm rounded-xl hover:border-white/40 transition-colors"
             >
               Ir al formulario de contacto
             </Link>

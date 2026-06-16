@@ -13,7 +13,7 @@ function PadelBallIcon() {
       viewBox="0 0 48 48"
       fill="none"
       aria-hidden="true"
-      className="text-[#D4FF00]"
+      className="text-[#B7D31A]"
     >
       <circle cx="24" cy="24" r="20" stroke="currentColor" strokeWidth="2.5" />
       <path
@@ -44,15 +44,15 @@ export default function FinalMessage({ data }: Props) {
     'Gracias por elegir Home Pádel. Cada compra nos impulsa a seguir creciendo y acercarte lo mejor del pádel. Vamos por más, juntos.';
 
   return (
-    <section className="bg-[#0a0a0a] border-t border-white/5 py-20">
+    <section className="section-gradient bg-[050606] border-t border-[#0D0F0F] py-20">
       <div className="max-w-2xl mx-auto px-4 text-center flex flex-col items-center gap-6">
         {/* Ícono */}
-        <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+        <div className="w-16 h-16 rounded-full bg-white/5 border border-[#0D0F0F] flex items-center justify-center">
           <PadelBallIcon />
         </div>
 
         {/* Eyebrow */}
-        <p className="text-[#D4FF00] text-xs font-black uppercase tracking-[0.3em]">
+        <p className="text-[#B7D31A] text-xs font-black uppercase tracking-[0.3em]">
           Home Pádel
         </p>
 
@@ -62,7 +62,7 @@ export default function FinalMessage({ data }: Props) {
         </h2>
 
         {/* Separador */}
-        <div className="w-12 h-0.5 bg-[#D4FF00]/40 rounded-full" />
+        <div className="w-12 h-0.5 bg-[#B7D31A]/40 rounded-full" />
 
         {/* Cuerpo */}
         {subtitle && (

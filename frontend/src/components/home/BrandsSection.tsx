@@ -101,7 +101,7 @@ export default function BrandsSection({ brands }: Props) {
         ));
 
   return (
-    <section className="bg-[#0a0a0a] border-t border-white/5 py-10 overflow-hidden">
+    <section className="section-gradient bg-[050606] border-t border-[#0D0F0F] py-10 overflow-hidden">
       {/* Título centrado */}
       <p className="text-center text-[10px] font-black uppercase tracking-[0.3em] text-white/25 mb-8">
         MARCAS QUE CONFÍAN EN NOSOTROS
