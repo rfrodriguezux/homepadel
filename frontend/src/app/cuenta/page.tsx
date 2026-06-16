@@ -25,6 +25,7 @@ import { login, register as registerUser, getMyOrders } from '@/lib/api';
 import { formatPrice } from '@/lib/utils';
 import { Order } from '@/types';
 import { useEffect } from 'react';
+import BrandLogo from '@/components/ui/BrandLogo';
 
 // Schemas de validación
 const loginSchema = z.object({
@@ -253,15 +254,10 @@ export default function CuentaPage() {
         </div>
 
         <div className="bg-white rounded-2xl border border-gray-200 p-8">
-          {/* Logo */}
+          {/* Logo oficial */}
           <div className="text-center mb-6">
-            <Link href="/" className="inline-flex items-center gap-2">
-              <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                <circle cx="16" cy="16" r="15" fill="#D4FF00" />
-                <circle cx="16" cy="16" r="11" fill="#111" />
-                <path d="M10 16 Q13 10 16 16 Q19 22 22 16" stroke="#D4FF00" strokeWidth="1.5" fill="none" />
-              </svg>
-              <span className="font-black text-lg text-[#111]">HOME<span className="text-[#D4FF00]">.</span>PÁDEL</span>
+            <Link href="/" aria-label="Home Pádel — Inicio" className="inline-block">
+              <BrandLogo variant="light" size="sm" showText={true} />
             </Link>
             <h1 className="text-xl font-black mt-3 text-[#111]">
               {isRegister ? 'Crear cuenta' : 'Bienvenido de vuelta'}

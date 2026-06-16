@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { Search, User, ShoppingCart, Menu, X } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';
 import { usePathname } from 'next/navigation';
+import BrandLogo from '@/components/ui/BrandLogo';
 
 const NAV_LINKS = [
   { label: 'Inicio',                href: '/' },
@@ -45,18 +46,10 @@ export default function Header() {
           </button>
         </div>
 
-        {/* CENTER — logo */}
+        {/* CENTER — logo oficial */}
         <div className="flex justify-center">
-          <Link href="/" className="flex flex-col items-center gap-0.5 select-none group" aria-label="Home Pádel">
-            {/* Ícono pelota */}
-            <svg width="22" height="22" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-              <circle cx="16" cy="16" r="15" stroke="#D4FF00" strokeWidth="1.5"/>
-              <path d="M4 16 Q10 8 16 16 Q22 24 28 16" stroke="#D4FF00" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-              <path d="M4 16 Q10 24 16 16 Q22 8 28 16" stroke="#D4FF00" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-            </svg>
-            <span className="font-black text-base tracking-tight text-white leading-none uppercase whitespace-nowrap">
-              HOME PÁDEL
-            </span>
+          <Link href="/" aria-label="Home Pádel — Inicio">
+            <BrandLogo variant="dark" size="sm" showText={true} />
           </Link>
         </div>
 

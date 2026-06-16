@@ -29,11 +29,24 @@ function SlideContent({ slide }: { slide: HeroSlide }) {
   const heroImage = slide.image ? getImageUrl(slide.image) : null;
 
   return (
-    <div className="relative z-10 max-w-7xl mx-auto px-4 py-12 w-full h-full flex items-center">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center w-full">
+    <>
+      {/* Imagen de fondo — cubre el 100% del ancho de la sección */}
+      {heroImage && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={heroImage}
+          alt={slide.title}
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+      )}
 
-        {/* ── Columna izquierda — Texto ── */}
-        <div className="flex flex-col gap-4">
+      {/* Gradiente sobre la imagen para legibilidad del texto */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/80 to-[#0a0a0a]/20" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/60 via-transparent to-transparent" />
+
+      {/* Contenido */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 w-full h-full flex items-center">
+        <div className="flex flex-col gap-4 py-10 max-w-lg">
           {slide.subtitle && (
             <div className="flex items-center gap-2">
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -57,7 +70,7 @@ function SlideContent({ slide }: { slide: HeroSlide }) {
           </h1>
 
           {slide.description && (
-            <p className="text-gray-400 text-sm md:text-base max-w-sm leading-relaxed">
+            <p className="text-gray-300 text-sm md:text-base max-w-sm leading-relaxed">
               {slide.description}
             </p>
           )}
@@ -85,39 +98,18 @@ function SlideContent({ slide }: { slide: HeroSlide }) {
           </div>
         </div>
 
-        {/* ── Columna derecha — Imagen ── */}
-        <div className="hidden md:flex items-center justify-end relative">
-          {/* Badge 9 cuotas */}
-          <div className="absolute top-0 right-0 bg-[#1a1a1a] border border-white/10 rounded-xl p-4 text-right z-20">
-            <p className="text-gray-500 text-[9px] uppercase tracking-widest leading-none mb-0.5">HASTA</p>
-            <p className="text-[#D4FF00] font-black text-5xl leading-none">9</p>
-            <p className="text-white font-black text-[10px] uppercase tracking-widest leading-tight mt-1">CUOTAS<br/>SIN INTERÉS</p>
-            <div className="flex justify-end gap-1 mt-2">
-              <div className="w-5 h-3 bg-gray-700 rounded-sm" />
-              <div className="w-5 h-3 bg-gray-700 rounded-sm" />
-            </div>
+        {/* Badge 9 cuotas — esquina superior derecha */}
+        <div className="absolute top-6 right-6 bg-[#1a1a1a]/90 backdrop-blur-sm border border-white/10 rounded-xl p-4 text-right hidden md:block">
+          <p className="text-gray-500 text-[9px] uppercase tracking-widest leading-none mb-0.5">HASTA</p>
+          <p className="text-[#D4FF00] font-black text-5xl leading-none">9</p>
+          <p className="text-white font-black text-[10px] uppercase tracking-widest leading-tight mt-1">CUOTAS<br/>SIN INTERÉS</p>
+          <div className="flex justify-end gap-1 mt-2">
+            <div className="w-5 h-3 bg-gray-700 rounded-sm" />
+            <div className="w-5 h-3 bg-gray-700 rounded-sm" />
           </div>
-
-          {heroImage ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={heroImage}
-              alt={slide.title}
-              className="relative z-10 h-[380px] w-auto object-contain object-center drop-shadow-2xl"
-            />
-          ) : (
-            <div className="relative z-10 w-72 h-[360px] rounded-2xl bg-[#1a1a1a] border border-white/10 flex flex-col items-center justify-center gap-4 mt-10">
-              <div className="w-20 h-20 rounded-full bg-[#D4FF00]/10 border border-[#D4FF00]/20 flex items-center justify-center">
-                <span className="text-[#D4FF00] font-black text-xl">HP</span>
-              </div>
-              <p className="text-gray-600 text-xs uppercase tracking-widest text-center px-8">
-                Subí una imagen desde el backoffice
-              </p>
-            </div>
-          )}
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -146,7 +138,7 @@ export default function HeroBanner({ slides }: Props) {
 
   return (
     <section
-      className="relative w-full bg-[#0a0a0a] overflow-hidden min-h-[420px] md:min-h-[520px] flex items-center"
+      className="relative w-full bg-[#0a0a0a] overflow-hidden h-[480px] md:h-[580px] flex items-center"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >

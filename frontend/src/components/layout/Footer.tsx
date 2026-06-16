@@ -1,8 +1,9 @@
 // Footer principal de Home Pádel
-// Fondo oscuro (#111) con logo, descripción, redes sociales, 4 columnas de links y barra de copyright
+// Fondo oscuro (#111) con logo oficial, descripción, redes sociales, 4 columnas de links y barra de copyright
 
 import Link from 'next/link';
 import { Instagram, Facebook, Youtube } from 'lucide-react';
+import BrandLogo from '@/components/ui/BrandLogo';
 
 export default function Footer() {
   return (
@@ -10,35 +11,10 @@ export default function Footer() {
       {/* ── Contenido principal ─────────────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-4 py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10">
-          {/* Logo + descripción + redes — ocupa 2 columnas */}
+          {/* Logo oficial + descripción + redes — ocupa 2 columnas */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <svg
-                width="28"
-                height="28"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <circle cx="16" cy="16" r="15" fill="#D4FF00" />
-                <circle cx="16" cy="16" r="11" fill="#111" />
-                <path
-                  d="M10 16 Q13 10 16 16 Q19 22 22 16"
-                  stroke="#D4FF00"
-                  strokeWidth="1.5"
-                  fill="none"
-                />
-                <path
-                  d="M10 16 Q13 22 16 16 Q19 10 22 16"
-                  stroke="#D4FF00"
-                  strokeWidth="1.5"
-                  fill="none"
-                />
-              </svg>
-              <span className="font-black text-xl tracking-tight text-white leading-none">
-                HOME<span className="text-[#D4FF00]">.</span>PÁDEL
-              </span>
+            <Link href="/" aria-label="Home Pádel — Inicio" className="inline-block mb-4">
+              <BrandLogo variant="dark" size="sm" showText={true} />
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
               Equipamiento profesional para jugadores apasionados. Las mejores

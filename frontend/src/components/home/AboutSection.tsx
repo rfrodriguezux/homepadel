@@ -1,6 +1,7 @@
 import { Heart, Users, Shield } from 'lucide-react';
 import { AboutSection as AboutData } from '@/types';
 import { getImageUrl } from '@/lib/utils';
+import BrandLogo from '@/components/ui/BrandLogo';
 
 const ICON_MAP: Record<string, React.ReactNode> = {
   Heart:  <Heart  size={20} strokeWidth={1.5} />,
@@ -93,14 +94,9 @@ export default function AboutSection({ data }: Props) {
                   <div className="w-3/4 h-2/3 border-2 border-white rounded-sm" />
                   <div className="absolute w-3/4 h-px bg-white" />
                 </div>
-                {/* Badge HOME PÁDEL */}
-                <div className="relative z-10 flex flex-col items-center gap-2">
-                  <svg width="36" height="36" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                    <circle cx="16" cy="16" r="15" stroke="#D4FF00" strokeWidth="1.5"/>
-                    <path d="M4 16 Q10 8 16 16 Q22 24 28 16" stroke="#D4FF00" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-                    <path d="M4 16 Q10 24 16 16 Q22 8 28 16" stroke="#D4FF00" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-                  </svg>
-                  <span className="text-white font-black text-sm tracking-tight uppercase">HOME PÁDEL</span>
+                {/* Logo oficial como identidad visual */}
+                <div className="relative z-10">
+                  <BrandLogo variant="dark" size="sm" showText={true} />
                 </div>
               </div>
             )}
