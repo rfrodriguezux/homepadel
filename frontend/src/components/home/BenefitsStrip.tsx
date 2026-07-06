@@ -13,20 +13,32 @@ const FALLBACK = [
 ];
 
 function getIcon(iconName: string): React.ReactNode {
-  const key = iconName.toLowerCase().replace(/([A-Z])/g, '-').replace(/^-/, '').replace(/--/g, '-');
+  if (!iconName) return <Truck size={36} />;
   const icons: Record<string, React.ReactNode> = {
+    'Truck': <Truck size={36} />,
     'truck': <Truck size={36} />,
+    'CreditCard': <CreditCard size={36} />,
     'credit-card': <CreditCard size={36} />,
+    'creditcard': <CreditCard size={36} />,
+    'RefreshCw': <RefreshCw size={36} />,
     'refresh-cw': <RefreshCw size={36} />,
+    'refreshcw': <RefreshCw size={36} />,
+    'Shield': <Shield size={36} />,
     'shield': <Shield size={36} />,
+    'Lock': <Lock size={36} />,
     'lock': <Lock size={36} />,
+    'Package': <Package size={36} />,
     'package': <Package size={36} />,
+    'Sparkles': <Sparkles size={36} />,
     'sparkles': <Sparkles size={36} />,
+    'Heart': <Heart size={36} />,
     'heart': <Heart size={36} />,
+    'Star': <Star size={36} />,
     'star': <Star size={36} />,
+    'Check': <Check size={36} />,
     'check': <Check size={36} />,
   };
-  return icons[key] || <Truck size={36} />;
+  return icons[iconName] || <Truck size={36} />;
 }
 
 export default function BenefitsStrip({ benefits }: Props) {
