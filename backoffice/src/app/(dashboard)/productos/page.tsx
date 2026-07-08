@@ -273,7 +273,7 @@ export default function ProductosPage() {
       {detailItem && <ProductDetailModal product={detailItem} onClose={() => setDetailItem(null)} />}
 
       {modalOpen && (
-        <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title={editItem ? 'Editar producto' : 'Nuevo producto'} size="lg">
+        <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title={editItem ? 'Editar producto' : 'Nuevo producto'} size="xl">
           <ProductForm
             defaultValues={defaultFormValues}
             onSave={handleSave}
