@@ -198,7 +198,7 @@ export default function InstagramConfigPage() {
             {fields.map((field, index) => (
               <div key={field.id} className="flex gap-2">
                 <input
-                  {...register('manualUrls.' + index + '.url')}
+                  {...register(('manualUrls.' + index + '.url') as any)}
                   className={inputClass}
                   placeholder={'Post #' + (index + 1) + ' - https://www.instagram.com/p/...'}
                 />
