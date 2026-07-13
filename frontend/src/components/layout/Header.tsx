@@ -47,12 +47,9 @@ export default function Header() {
             {NAV_LINKS.map((link) => {
               const active = pathname === link.href;
               return (
-                <Link
-                  key={link.href}
-                  href={link.href}
+                <Link key={link.href} href={link.href}
                   className={'relative px-3 py-2 text-[11px] font-semibold uppercase tracking-wide transition-colors whitespace-nowrap ' +
-                    (active ? 'text-[#B7D31A]' : 'text-[#C7C7C0] hover:text-[#F7F6F7]')}
-                >
+                    (active ? 'text-[#B7D31A]' : 'text-[#C7C7C0] hover:text-[#F7F6F7]')}>
                   {link.label}
                   {active && <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-[#B7D31A] rounded-full" />}
                 </Link>
@@ -64,11 +61,7 @@ export default function Header() {
             <Link href="/cuenta" className="hidden sm:block text-[#C7C7C0] hover:text-[#F7F6F7] transition-colors" aria-label="Mi cuenta">
               <User size={20} />
             </Link>
-            <button
-              onClick={() => setCartOpen(true)}
-              className="relative text-[#C7C7C0] hover:text-[#F7F6F7] transition-colors"
-              aria-label="Carrito"
-            >
+            <button onClick={() => setCartOpen(true)} className="relative text-[#C7C7C0] hover:text-[#F7F6F7] transition-colors" aria-label="Carrito">
               <ShoppingCart size={20} />
               {mounted && totalItems() > 0 && (
                 <span className="absolute -top-2 -right-2 bg-[#B7D31A] text-[#050606] text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
@@ -86,18 +79,11 @@ export default function Header() {
           <nav className="lg:hidden border-t border-[#0D0F0F] bg-[#050606]">
             <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex flex-col gap-1">
               {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="block py-3 text-sm font-semibold text-[#C7C7C0] hover:text-[#F7F6F7] uppercase tracking-wide"
-                  onClick={() => setOpen(false)}
-                >
+                <Link key={link.href} href={link.href} className="block py-3 text-sm font-semibold text-[#C7C7C0] hover:text-[#F7F6F7] uppercase tracking-wide" onClick={() => setOpen(false)}>
                   {link.label}
                 </Link>
               ))}
-              <Link href="/cuenta" className="block py-3 text-sm font-semibold text-[#C7C7C0] hover:text-[#F7F6F7]" onClick={() => setOpen(false)}>
-                Mi cuenta
-              </Link>
+              <Link href="/cuenta" className="block py-3 text-sm font-semibold text-[#C7C7C0] hover:text-[#F7F6F7]" onClick={() => setOpen(false)}>Mi cuenta</Link>
             </div>
           </nav>
         )}

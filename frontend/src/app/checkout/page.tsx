@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -36,7 +35,6 @@ const inputClass = 'w-full bg-[#161818] border border-[#1A1F21] rounded-lg px-4 
 const errorInputClass = 'w-full bg-[#161818] border border-red-500/50 rounded-lg px-4 py-2.5 text-sm text-[#F7F6F7] placeholder-[#8A8A85] focus:outline-none focus:border-red-500 transition-colors';
 
 export default function CheckoutPage() {
-  const router = useRouter();
   const { items, totalPrice, clearCart } = useCartStore();
   const { user } = useAuthStore();
   const [orderSuccess, setOrderSuccess] = useState(false);
@@ -66,10 +64,13 @@ export default function CheckoutPage() {
 
   const onSubmit = async (data: CheckoutFormData) => {
     try {
+      const address = data.street + ', ' + data.city + ', ' + data.province + ' (' + data.postalCode + ')';
       const orderData = {
         items: items.map((i) => ({ productId: i.product.id, quantity: i.quantity, price: i.product.salePrice ?? i.product.price })),
-        shipping: { name: data.name, email: data.email, phone: data.phone, street: data.street, city: data.city, province: data.province, postalCode: data.postalCode },
-        paymentMethod: data.paymentMethod,
+        address,
+        buyerEmail: data.email,
+        buyerPhone: data.phone,
+        buyerName: data.name,
         total,
       };
       let result;
@@ -90,10 +91,14 @@ export default function CheckoutPage() {
           <h1 className="text-2xl font-black text-[#F7F6F7] mb-2">Pedido confirmado!</h1>
           <p className="text-[#8A8A85] text-sm mb-1">Numero de orden:</p>
           <p className="text-2xl font-black text-[#B7D31A] bg-[#1A1F21] px-6 py-2 rounded-lg mb-5 inline-block">#{orderNumber}</p>
-          <p className="text-[#8A8A85] text-sm mb-8">Te enviamos un email de confirmacion con los detalles de tu pedido.</p>
+          <p className="text-[#8A8A85] text-sm mb-8">Te enviamos un email con los detalles y el link de seguimiento.</p>
           <div className="flex flex-col gap-3">
-            <Link href="/cuenta" className="bg-[#B7D31A] text-[#050606] py-3 rounded-xl font-bold text-sm hover:bg-[#c8e81f] transition-colors">Ver mis pedidos</Link>
-            <Link href="/" className="border border-[#0D0F0F] py-3 rounded-xl font-bold text-sm text-[#C7C7C0] hover:bg-[#0C0C0C] transition-colors">Volver al inicio</Link>
+            <Link href={'/rastrear?order=' + orderNumber} className="bg-[#B7D31A] text-[#050606] py-3 rounded-xl font-bold text-sm hover:bg-[#c8e81f] transition-colors flex items-center justify-center gap-2">
+              <Truck size={16} /> Rastrear mi pedido
+            </Link>
+            <Link href="/" className="border border-[#0D0F0F] py-3 rounded-xl font-bold text-sm text-[#C7C7C0] hover:bg-[#0C0C0C] transition-colors">
+              Volver al inicio
+            </Link>
           </div>
         </div>
       </div>
@@ -107,13 +112,12 @@ export default function CheckoutPage() {
           <p className="text-xs text-[#8A8A85] mb-1">
             <Link href="/" className="hover:text-[#F7F6F7]">Inicio</Link> / <Link href="/carrito" className="hover:text-[#F7F6F7]">Carrito</Link> / <span className="text-[#C7C7C0]">Checkout</span>
           </p>
-          <h1 className="text-2xl font-black uppercase tracking-tight text-[#F7F6F7]">Finalizar compra</h1>
+          <h1 className="text-2xl font-black uppercase tracking-tight text-[#F7F6F7]">Completar compra</h1>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-6">
-              {/* Datos personales */}
               <div className="bg-[#0F1111] rounded-2xl border border-[#B7D31A]/20 p-6">
                 <div className="flex items-center gap-3 mb-5">
                   <div className="w-8 h-8 bg-[#B7D31A] rounded-full flex items-center justify-center text-[#050606] font-black text-sm">1</div>
@@ -138,7 +142,6 @@ export default function CheckoutPage() {
                 </div>
               </div>
 
-              {/* Direccion */}
               <div className="bg-[#0F1111] rounded-2xl border border-[#B7D31A]/20 p-6">
                 <div className="flex items-center gap-3 mb-5">
                   <div className="w-8 h-8 bg-[#B7D31A] rounded-full flex items-center justify-center text-[#050606] font-black text-sm">2</div>
@@ -171,7 +174,6 @@ export default function CheckoutPage() {
                 </div>
               </div>
 
-              {/* Pago */}
               <div className="bg-[#0F1111] rounded-2xl border border-[#B7D31A]/20 p-6">
                 <div className="flex items-center gap-3 mb-5">
                   <div className="w-8 h-8 bg-[#B7D31A] rounded-full flex items-center justify-center text-[#050606] font-black text-sm">3</div>
@@ -188,15 +190,8 @@ export default function CheckoutPage() {
                       <div className={'w-5 h-5 rounded-full border-2 flex items-center justify-center ' + (selectedPayment === pm.value ? 'border-[#B7D31A]' : 'border-[#1A1F21]')}>
                         {selectedPayment === pm.value && <div className="w-2.5 h-2.5 rounded-full bg-[#B7D31A]" />}
                       </div>
-                      <div className="flex-1">
-                        <p className="font-bold text-sm text-[#F7F6F7]">{pm.label}</p>
-                        <p className="text-xs text-[#8A8A85]">{pm.desc}</p>
-                      </div>
-                      {pm.badge.length > 0 && (
-                        <div className="flex gap-1">
-                          {pm.badge.map((b) => <span key={b} className="text-xs border border-[#0D0F0F] px-1.5 py-0.5 rounded font-bold text-[#8A8A85] bg-[#1A1F21]">{b}</span>)}
-                        </div>
-                      )}
+                      <div className="flex-1"><p className="font-bold text-sm text-[#F7F6F7]">{pm.label}</p><p className="text-xs text-[#8A8A85]">{pm.desc}</p></div>
+                      {pm.badge.length > 0 && <div className="flex gap-1">{pm.badge.map((b) => <span key={b} className="text-xs border border-[#0D0F0F] px-1.5 py-0.5 rounded font-bold text-[#8A8A85] bg-[#1A1F21]">{b}</span>)}</div>}
                     </label>
                   ))}
                 </div>
@@ -204,7 +199,6 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            {/* Resumen */}
             <div className="lg:col-span-1">
               <div className="bg-[#0F1111] rounded-2xl border border-[#B7D31A]/20 p-6 sticky top-24">
                 <h2 className="font-black text-base uppercase tracking-tight text-[#F7F6F7] mb-4">Tu pedido</h2>
@@ -217,10 +211,7 @@ export default function CheckoutPage() {
                           {product.images[0] ? <img src={getImageUrl(product.images[0])} alt={product.name} className="w-full h-full object-cover" />
                             : <div className="w-full h-full flex items-center justify-center text-xs font-black text-[#8A8A85]">{product.name.slice(0, 2).toUpperCase()}</div>}
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-xs font-medium text-[#C7C7C0] truncate">{product.name}</p>
-                          <p className="text-xs text-[#8A8A85]">x{quantity}</p>
-                        </div>
+                        <div className="flex-1 min-w-0"><p className="text-xs font-medium text-[#C7C7C0] truncate">{product.name}</p><p className="text-xs text-[#8A8A85]">x{quantity}</p></div>
                         <p className="text-xs font-bold text-[#F7F6F7] flex-none">{formatPrice(price * quantity)}</p>
                       </div>
                     );
@@ -233,7 +224,7 @@ export default function CheckoutPage() {
                 </div>
                 <button type="submit" disabled={isSubmitting}
                   className="mt-5 w-full flex items-center justify-center gap-2 bg-[#B7D31A] text-[#050606] py-4 rounded-xl font-black text-sm uppercase tracking-wider hover:bg-[#c8e81f] transition-colors disabled:opacity-70 disabled:cursor-not-allowed">
-                  {isSubmitting ? 'Procesando...' : <><Lock size={15} /> Confirmar pedido <ChevronRight size={15} /></>}
+                  {isSubmitting ? 'Procesando...' : <><Lock size={15} /> Realizar pedido <ChevronRight size={15} /></>}
                 </button>
                 <p className="text-[#8A8A85] text-xs text-center mt-3">Tus datos estan protegidos con encriptacion SSL</p>
               </div>
