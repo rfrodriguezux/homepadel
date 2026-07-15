@@ -66,8 +66,13 @@ model Product {
   features          Json?
   performanceStats  Json?
   relatedProductIds String[]
+  relatedVideos   Json?
+  compareData     Json?
+  specs           Json?
   videoUrl          String?
   highlights        Json?
+  highlightsTitle   String?
+  highlightsDescription String?
   paymentMethods    Json?
   transferPrice     Float?
   orderItems        OrderItem[]
