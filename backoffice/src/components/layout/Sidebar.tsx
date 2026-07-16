@@ -16,7 +16,7 @@ import {
   Receipt,
   Settings,
   PlaySquare,
-  Sparkles,
+  Sparkles, Shield,
   MessageSquare,
   Info,
   Instagram,
@@ -72,6 +72,7 @@ const navGroups: NavGroup[] = [
       { label: 'FAQ', href: '/faq', icon: HelpCircle },
       { label: 'Instagram', href: '/configuracion/instagram', icon: Instagram },
       { label: 'CTA & Newsletter', href: '/configuracion/mensaje-final', icon: Megaphone },
+      { label: 'Confianza Productos', href: '/configuracion/confianza-productos', icon: Shield },
     ],
   },
   {
