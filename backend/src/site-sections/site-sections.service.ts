@@ -4,7 +4,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import * as fs from 'fs';
 import * as path from 'path';
 
-export type SectionKey = 'about' | 'instagram' | 'final_message' | 'branding' | 'settings';
+export type SectionKey = 'about' | 'instagram' | 'final_message' | 'branding' | 'settings' | 'trust_bottom';
 
 @Injectable()
 export class SiteSectionsService {
@@ -90,6 +90,7 @@ export class SiteSectionsService {
         isotipo: null,
         logoMobile: null,
       },
+      trust_bottom: { items: [], active: true },
       final_message: {
         title: 'Un mensaje para vos',
         text: 'Gracias por elegir Home Padel.',

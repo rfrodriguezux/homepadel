@@ -1,4 +1,4 @@
-﻿import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -16,9 +16,25 @@ export class ReviewsService {
     return this.prisma.productReview.findMany({ orderBy: { createdAt: 'desc' } });
   }
 
-  async create(dto: { productId: string; name: string; rating: number; comment: string }) {
+  findByUser(userId: string) {
+    return this.prisma.productReview.findMany({
+      where: { userId },
+      include: { product: { select: { id: true, name: true, slug: true, images: true } } },
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
+  async create(dto: { productId: string; name: string; rating: number; comment: string; userId?: string }) {
     return this.prisma.productReview.create({
-      data: { ...dto, active: false },
+      data: {
+        productId: dto.productId,
+        name: dto.name,
+        rating: dto.rating,
+        comment: dto.comment,
+        userId: dto.userId || null,
+        verified: !!dto.userId,
+        active: false,
+      },
     });
   }
 

@@ -1,9 +1,10 @@
-﻿import { Controller, Get, Post, Patch, Delete, Param, Body, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Delete, Param, Body, Query, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { ReviewsService } from './reviews.service';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
+import { CurrentUser } from '../common/decorators/current-user.decorator';
 import { Role } from '@prisma/client';
 
 @ApiTags('Reviews')
@@ -16,6 +17,13 @@ export class ReviewsController {
     return this.reviewsService.findAll(productId);
   }
 
+  @Get('my')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  findMine(@CurrentUser() user: any) {
+    return this.reviewsService.findByUser(user.id);
+  }
+
   @Get('admin/all')
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RolesGuard)
@@ -25,8 +33,10 @@ export class ReviewsController {
   }
 
   @Post()
-  create(@Body() dto: { productId: string; name: string; rating: number; comment: string }) {
-    return this.reviewsService.create(dto);
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  create(@Body() dto: { productId: string; name: string; rating: number; comment: string }, @CurrentUser() user: any) {
+    return this.reviewsService.create({ ...dto, name: dto.name || user.name, userId: user.id });
   }
 
   @Patch(':id/approve')

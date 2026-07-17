@@ -143,39 +143,12 @@ export default function ProductoPage() {
       
 
       {(embedUrl || highlights.length > 0) && (
-        <section className="border-t border-[#0D0F0F] py-6">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
-              <VideoSection embedUrl={embedUrl} />
-              <HighlightsSection highlights={highlights} highlightsTitle={highlightsTitle} highlightsDescription={highlightsDescription} relatedVideos={relatedVideos} />
-            </div>
-          </div>
-        </section>
+        <ProductReviews productId={product.id} />
       )}
 
       <CompareModels data={compareData} />
 
-      <section className="border-t border-[#0D0F0F] py-6">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <h2 className="text-xl md:text-2xl font-semibold uppercase tracking-tight text-[#F7F6F7] mb-6">
-            LO QUE DICEN NUESTROS CLIENTES
-          </h2>
-          <div className="flex flex-col lg:flex-row gap-6">
-            <div className="lg:w-[30%] flex-shrink-0">
-              <OverallCustomerOpinions averageRating={4.5} totalReviews={30595} distribution={[
-                { stars: 5, count: 24000, percentage: 78 },
-                { stars: 4, count: 4500, percentage: 15 },
-                { stars: 3, count: 1200, percentage: 4 },
-                { stars: 2, count: 500, percentage: 2 },
-                { stars: 1, count: 395, percentage: 1 },
-              ]} />
-            </div>
-            <div className="flex-1 min-w-0">
-              <ProductReviews reviews={[]} />
-            </div>
-          </div>
-        </div>
-      </section>
+      <ProductReviews productId={product.id} />
 
       <RelatedProducts products={related} />
 
