@@ -73,6 +73,7 @@ const navGroups: NavGroup[] = [
       { label: 'Instagram', href: '/configuracion/instagram', icon: Instagram },
       { label: 'CTA & Newsletter', href: '/configuracion/mensaje-final', icon: Megaphone },
       { label: 'Confianza Productos', href: '/configuracion/confianza-productos', icon: Shield },
+      
       { label: 'Politica de Devolucion', href: '/configuracion/paginas', icon: RefreshCw },
     ],
   },
