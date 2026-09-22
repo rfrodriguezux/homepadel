@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { SlidersHorizontal, Tags, Target, Grid3x3, Rows3, ArrowDownUp, ChevronLeft } from 'lucide-react';
+import { SlidersHorizontal, Tags, Target, Grid3x3, Rows3, ArrowDownUp, ChevronLeft, Circle } from 'lucide-react';
 import { Category, Brand } from '@/types';
 
 const SORT_OPTIONS = [
@@ -10,6 +10,8 @@ const SORT_OPTIONS = [
   { value: 'price_desc', label: 'Precio: mayor a menor' },
   { value: 'name_asc', label: 'Nombre A-Z' },
 ];
+
+const SHAPE_OPTIONS = ['Diamante', 'Lágrima', 'Redondo'];
 
 interface Props {
   categories: Category[];
@@ -30,12 +32,15 @@ interface Props {
   sizes: string[];
   colors: string[];
   weights: string[];
+  shapes: string[];
   selectedSize: string;
   selectedColor: string;
   selectedWeight: string;
+  selectedShape: string;
   onSizeChange: (value: string | null) => void;
   onColorChange: (value: string | null) => void;
   onWeightChange: (value: string | null) => void;
+  onShapeChange: (value: string | null) => void;
 }
 
 const MENU_ITEMS = [
@@ -51,13 +56,12 @@ export default function CatalogSidebar({
   categories, brands, selectedCategory, selectedBrand, isOffer, totalCount,
   viewMode, currentSort, onViewModeChange, onSortChange,
   onCategoryChange, onBrandChange, onOfferChange, onClear, hasFilters,
-  sizes, colors, weights, selectedSize, selectedColor, selectedWeight,
-  onSizeChange, onColorChange, onWeightChange,
+  sizes, colors, weights, shapes, selectedSize, selectedColor, selectedWeight, selectedShape,
+  onSizeChange, onColorChange, onWeightChange, onShapeChange,
 }: Props) {
   const [activePanel, setActivePanel] = useState<ActivePanel>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
 
-  // Cerrar con Escape
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setActivePanel(null);
@@ -76,7 +80,6 @@ export default function CatalogSidebar({
 
   return (
     <div className="flex items-start gap-0">
-      {/* Barra de iconos vertical */}
       <div className="flex flex-col items-center gap-1 py-2">
         {MENU_ITEMS.map((item) => {
           const Icon = item.icon;
@@ -93,7 +96,6 @@ export default function CatalogSidebar({
 
         <div className="w-6 h-px bg-[#0D0F0F] my-2" />
 
-        {/* Vista Grid/List */}
         <button onClick={() => onViewModeChange(viewMode === 'grid' ? 'list' : 'grid')}
           className="w-10 h-10 rounded-xl flex items-center justify-center text-[#8A8A85] hover:text-[#F7F6F7] hover:bg-[#0C0C0C] transition-colors"
           title={viewMode === 'grid' ? 'Vista lista' : 'Vista grilla'}>
@@ -101,14 +103,11 @@ export default function CatalogSidebar({
         </button>
       </div>
 
-      {/* Panel expandible - solo se muestra si activePanel no es null */}
       {activePanel && (
         <>
-          {/* Overlay para cerrar al hacer clic fuera */}
           <div className="fixed inset-0 z-10" onClick={closePanel} />
 
           <div ref={sidebarRef} className="relative z-20 w-56 bg-[#0C0C0C] border border-[#0D0F0F] rounded-2xl p-4 ml-2 shadow-2xl animate-fade-in">
-            {/* Boton para contraer */}
             <button onClick={closePanel}
               className="absolute top-3 right-3 w-7 h-7 rounded-lg flex items-center justify-center text-[#C7C7C0] hover:text-[#F7F6F7] bg-white/[0.04] hover:bg-white/[0.08] transition-colors"
               title="Cerrar panel">
@@ -134,7 +133,7 @@ export default function CatalogSidebar({
             )}
 
             {activePanel === 'categories' && sizes.length > 0 && (
-              <div className="mt-5 border-t border-[#0D0F0F] pt-4">
+              <div className="mt-6 border-t border-[#0D0F0F] pt-5 pb-3">
                 <h3 className="text-xs font-semibold text-[#F7F6F7] uppercase tracking-wider mb-3">Talles</h3>
                 <select value={selectedSize} onChange={(e) => onSizeChange(e.target.value || null)} className="w-full bg-[#050606] border border-[#8A8A85] rounded-lg px-2 py-2 text-sm text-[#F7F6F7]">
                   <option value="">Todos</option>{sizes.map((value) => <option key={value} value={value}>{value}</option>)}
@@ -142,10 +141,13 @@ export default function CatalogSidebar({
               </div>
             )}
 
-            {activePanel === 'brands' && (colors.length > 0 || weights.length > 0) && (
-              <div className="mt-5 border-t border-[#0D0F0F] pt-4 space-y-4">
-                {colors.length > 0 && <div><h3 className="text-xs font-semibold text-[#F7F6F7] uppercase tracking-wider mb-3">Colores</h3><select value={selectedColor} onChange={(e) => onColorChange(e.target.value || null)} className="w-full bg-[#050606] border border-[#8A8A85] rounded-lg px-2 py-2 text-sm text-[#F7F6F7]"><option value="">Todos</option>{colors.map((value) => <option key={value} value={value}>{value}</option>)}</select></div>}
-                {weights.length > 0 && <div><h3 className="text-xs font-semibold text-[#F7F6F7] uppercase tracking-wider mb-3">Peso</h3><select value={selectedWeight} onChange={(e) => onWeightChange(e.target.value || null)} className="w-full bg-[#050606] border border-[#8A8A85] rounded-lg px-2 py-2 text-sm text-[#F7F6F7]"><option value="">Todos</option>{weights.map((value) => <option key={value} value={value}>{value}</option>)}</select></div>}
+            {activePanel === 'categories' && selectedCategory === 'paletas' && (
+              <div className="mt-6 border-t border-[#0D0F0F] pt-5 pb-3">
+                <h3 className="text-xs font-semibold text-[#F7F6F7] uppercase tracking-wider mb-3 flex items-center gap-1.5"><Circle size={12} />Formato</h3>
+                <select value={selectedShape} onChange={(e) => onShapeChange(e.target.value || null)} className="w-full bg-[#050606] border border-[#8A8A85] rounded-lg px-2 py-2 text-sm text-[#F7F6F7]">
+                  <option value="">Todos</option>
+                  {(shapes.length > 0 ? shapes : SHAPE_OPTIONS).map((value) => <option key={value} value={value}>{value}</option>)}
+                </select>
               </div>
             )}
 
@@ -164,6 +166,24 @@ export default function CatalogSidebar({
                     </label>
                   ))}
                 </div>
+              </div>
+            )}
+
+            {activePanel === 'brands' && colors.length > 0 && (
+              <div className="mt-6 border-t border-[#0D0F0F] pt-5 pb-3">
+                <h3 className="text-xs font-semibold text-[#F7F6F7] uppercase tracking-wider mb-3">Colores</h3>
+                <select value={selectedColor} onChange={(e) => onColorChange(e.target.value || null)} className="w-full bg-[#050606] border border-[#8A8A85] rounded-lg px-2 py-2 text-sm text-[#F7F6F7]">
+                  <option value="">Todos</option>{colors.map((value) => <option key={value} value={value}>{value}</option>)}
+                </select>
+              </div>
+            )}
+
+            {activePanel === 'brands' && weights.length > 0 && (
+              <div className="mt-6 border-t border-[#0D0F0F] pt-5 pb-3">
+                <h3 className="text-xs font-semibold text-[#F7F6F7] uppercase tracking-wider mb-3">Peso</h3>
+                <select value={selectedWeight} onChange={(e) => onWeightChange(e.target.value || null)} className="w-full bg-[#050606] border border-[#8A8A85] rounded-lg px-2 py-2 text-sm text-[#F7F6F7]">
+                  <option value="">Todos</option>{weights.map((value) => <option key={value} value={value}>{value}</option>)}
+                </select>
               </div>
             )}
 

@@ -1,13 +1,14 @@
 ﻿'use client';
 
 import { useState } from 'react';
-import { X, Tag, Layers, Star, Package } from 'lucide-react';
+import { X, Tag, Layers, Star, Package, Circle } from 'lucide-react';
 
 export interface ProductAdvancedFilters {
   categoryId: string | null;
   brandId: string | null;
   active: boolean | null;
   featured: boolean | null;
+  shape: string | null;
 }
 
 interface Category { id: string; name: string }
@@ -24,25 +25,28 @@ interface Props {
 const menuItems = [
   { id: 'category', label: 'Categoria', icon: Layers },
   { id: 'brand', label: 'Marca', icon: Package },
+  { id: 'shape', label: 'Formato', icon: Circle },
   { id: 'active', label: 'Estado', icon: Tag },
   { id: 'featured', label: 'Destacado', icon: Star },
 ];
 
-type MenuSection = 'category' | 'brand' | 'active' | 'featured';
+type MenuSection = 'category' | 'brand' | 'shape' | 'active' | 'featured';
 
 export default function ProductAdvancedSearchModal({ isOpen, onClose, onApply, categories, brands }: Props) {
   const [activeSection, setActiveSection] = useState<MenuSection>('category');
   const [categoryId, setCategoryId] = useState<string | null>(null);
   const [brandId, setBrandId] = useState<string | null>(null);
+  const [shape, setShape] = useState<string | null>(null);
   const [active, setActive] = useState<boolean | null>(null);
   const [featured, setFeatured] = useState<boolean | null>(null);
 
   if (!isOpen) return null;
 
-  const hasFilters = categoryId !== null || brandId !== null || active !== null || featured !== null;
+  const isPaletaCategory = categories.find(c => c.id === categoryId)?.name === 'Paletas';
+  const hasFilters = categoryId !== null || brandId !== null || shape !== null || active !== null || featured !== null;
 
-  const handleClear = () => { setCategoryId(null); setBrandId(null); setActive(null); setFeatured(null); };
-  const handleApply = () => { onApply({ categoryId, brandId, active, featured }); onClose(); };
+  const handleClear = () => { setCategoryId(null); setBrandId(null); setShape(null); setActive(null); setFeatured(null); };
+  const handleApply = () => { onApply({ categoryId, brandId, active, featured, shape }); onClose(); };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4">
@@ -111,6 +115,21 @@ export default function ProductAdvancedSearchModal({ isOpen, onClose, onApply, c
                   <label key={b.id} className={'flex items-center gap-2 px-4 py-2.5 sm:py-3 rounded-lg border cursor-pointer transition-colors ' + (brandId === b.id ? 'border-[#C8FF00] bg-[#C8FF00]/5 text-[#C8FF00]' : 'border-gray-200 text-gray-600 hover:bg-gray-50')}>
                     <input type="radio" name="brand" checked={brandId === b.id} onChange={() => setBrandId(b.id)} className="sr-only" />
                     <span className="text-sm font-medium">{b.name}</span>
+                  </label>
+                ))}
+              </div>
+            )}
+
+            {activeSection === 'shape' && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                <label className={'flex items-center gap-2 px-4 py-2.5 sm:py-3 rounded-lg border cursor-pointer transition-colors ' + (!shape ? 'border-[#C8FF00] bg-[#C8FF00]/5 text-[#C8FF00]' : 'border-gray-200 text-gray-600 hover:bg-gray-50')}>
+                  <input type="radio" name="shape" checked={!shape} onChange={() => setShape(null)} className="sr-only" />
+                  <span className="text-sm font-medium">Todos</span>
+                </label>
+                {['Diamante', 'Lágrima', 'Redondo'].map((opt) => (
+                  <label key={opt} className={'flex items-center gap-2 px-4 py-2.5 sm:py-3 rounded-lg border cursor-pointer transition-colors ' + (shape === opt ? 'border-[#C8FF00] bg-[#C8FF00]/5 text-[#C8FF00]' : 'border-gray-200 text-gray-600 hover:bg-gray-50')}>
+                    <input type="radio" name="shape" checked={shape === opt} onChange={() => setShape(opt)} className="sr-only" />
+                    <span className="text-sm font-medium">{opt}</span>
                   </label>
                 ))}
               </div>

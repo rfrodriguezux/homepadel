@@ -40,6 +40,7 @@ export class CreateProductDto {
   @ApiPropertyOptional()    @IsBoolean() @IsOptional()            hasColor?: boolean;
   @ApiPropertyOptional()    @IsBoolean() @IsOptional()            hasDimensions?: boolean;
   @ApiPropertyOptional()    @IsBoolean() @IsOptional()            hasWeight?: boolean;
+  @ApiPropertyOptional()    @IsString()  @IsOptional()            shape?: string;
   @ApiPropertyOptional()    @IsString()  @IsOptional()            size?: string;
   @ApiPropertyOptional()    @IsString()  @IsOptional()            color?: string;
   @ApiPropertyOptional()    @IsNumber()  @IsOptional()            dimensionLength?: number;

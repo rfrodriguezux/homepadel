@@ -45,6 +45,7 @@ export interface Product {
   hasDimensions?: boolean;
   hasWeight?: boolean;
   size?: string | null;
+  shape?: string;
   color?: string | null;
   dimensionLength?: number | null;
   dimensionWidth?: number | null;

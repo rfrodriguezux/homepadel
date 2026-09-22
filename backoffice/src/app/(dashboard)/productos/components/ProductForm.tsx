@@ -35,6 +35,7 @@ const schema = z.object({
   hasWeight: z.boolean().default(false),
   size: z.string().optional(),
   color: z.string().optional(),
+  shape: z.string().optional(),
   dimensionLength: z.preprocess((val) => val === '' || val === null ? undefined : val, z.coerce.number().finite().optional()),
   dimensionWidth: z.preprocess((val) => val === '' || val === null ? undefined : val, z.coerce.number().finite().optional()),
   dimensionHeight: z.preprocess((val) => val === '' || val === null ? undefined : val, z.coerce.number().finite().optional()),
@@ -59,7 +60,7 @@ export type ProductFormData = z.infer<typeof schema> & {
   variants?: { id?: string; sku: string; size: string; color?: string; dimensions?: string; dimensionLength?: number; dimensionWidth?: number; dimensionHeight?: number; dimensionUnit?: string; weight?: number; weightUnit?: string; imageUrl?: string; images?: string[]; stock: number }[];
 };
 
-interface Category { id: string; name: string }
+interface Category { id: string; name: string; slug?: string }
 interface Brand { id: string; name: string }
 
 interface Props {
@@ -121,8 +122,10 @@ export default function ProductForm({
   const hasWeight = watch('hasWeight');
   const hasInstallmentsInterest = watch('hasInstallmentsInterest');
   const isMadeToOrder = watch('isMadeToOrder');
+  const categoryId = watch('categoryId');
 
   const previewUrl = getImageUrl(mainImage);
+  const isPaleta = categories.find(c => c.id === categoryId)?.slug === 'paletas';
 
   const handleUpload = async () => {
     const input = document.createElement('input');
@@ -157,22 +160,6 @@ export default function ProductForm({
 
     const skuSet = new Set<string>();
     for (const v of variants) {
-      if (hasSize && !v.size.trim()) {
-        alert('Todas las variantes deben tener talle');
-        return;
-      }
-      if (hasColor && !v.color?.trim()) {
-        alert('Todas las variantes deben tener color');
-        return;
-      }
-      if (hasDimensions && (!v.dimensionLength || !v.dimensionWidth || !v.dimensionHeight || !v.dimensionUnit)) {
-        alert('Todas las variantes deben tener largo, ancho, alto y unidad');
-        return;
-      }
-      if (hasWeight && (!v.weight || !v.weightUnit)) {
-        alert('Todas las variantes deben tener peso y unidad');
-        return;
-      }
       if (v.sku && v.sku.trim()) {
         const skuLower = v.sku.trim().toLowerCase();
         if (skuSet.has(skuLower)) {
@@ -184,13 +171,11 @@ export default function ProductForm({
     }
 
     const allImages = [mainImage, ...galleryImages].filter(Boolean) as string[];
-    if (!hasSalePrice) {
-      const cleanData: any = { ...data };
-      cleanData.salePrice = undefined;
-      onSave({ ...cleanData, images: allImages, variants });
-    } else {
-      onSave({ ...data, images: allImages, variants });
-    }
+    const finalData: any = { ...data, images: allImages, variants };
+    if (!isPaleta) finalData.shape = null;
+    if (!hasSalePrice) finalData.salePrice = undefined;
+
+    onSave(finalData);
   };
 
   return (
@@ -229,53 +214,6 @@ export default function ProductForm({
           <label className={labelClass}>Nombre *</label>
           <input {...register('name')} className={inputClass + ' mt-1'} />
           {errors.name && <p className="text-xs text-red-600 mt-0.5">{errors.name.message}</p>}
-        </div>
-        <div className="sm:col-span-2 border-t border-gray-100 pt-4">
-          <label className={labelClass}>Propiedades de variantes</label>
-          <div className="flex flex-wrap gap-4 mt-2">
-            {[
-              ['hasSize', 'Talle', hasSize],
-              ['hasColor', 'Color', hasColor],
-              ['hasDimensions', 'Dimensiones', hasDimensions],
-              ['hasWeight', 'Peso', hasWeight],
-            ].map(([name, label]) => (
-              <label key={name as string} className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
-                <input type="checkbox" {...register(name as 'hasSize' | 'hasColor' | 'hasDimensions' | 'hasWeight')} className="w-4 h-4 rounded accent-[#C8FF00]" />
-                {label as string}
-              </label>
-            ))}
-          </div>
-          <p className="text-[10px] text-gray-400 mt-1">Solo se mostrarán en cada variante las propiedades activadas.</p>
-        </div>
-        <div className="sm:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-3 border-b border-gray-100 pb-4">
-          {hasSize && <div>
-            <label className={labelClass}>Talle del producto</label>
-            <input {...register('size')} className={inputClass + ' mt-1'} placeholder="Ej: Único, M, 42" />
-          </div>}
-          {hasColor && <div>
-            <label className={labelClass}>Color del producto</label>
-            <input {...register('color')} className={inputClass + ' mt-1'} placeholder="Ej: Negro" />
-          </div>}
-          {hasDimensions && <div className="sm:col-span-2">
-            <label className={labelClass}>Dimensiones del producto</label>
-            <div className="grid grid-cols-4 gap-2 mt-1">
-              <input type="number" step="any" disabled={!hasDimensions} {...register('dimensionLength')} className={inputClass} placeholder="Largo" />
-              <input type="number" step="any" disabled={!hasDimensions} {...register('dimensionWidth')} className={inputClass} placeholder="Ancho" />
-              <input type="number" step="any" disabled={!hasDimensions} {...register('dimensionHeight')} className={inputClass} placeholder="Alto" />
-              <select {...register('dimensionUnit')} className={inputClass}>
-                {['mm', 'cm', 'm', 'in'].map((unit) => <option key={unit} value={unit}>{unit}</option>)}
-              </select>
-            </div>
-          </div>}
-          {hasWeight && <div>
-            <label className={labelClass}>Peso del producto</label>
-            <div className="grid grid-cols-[1fr_auto] gap-2 mt-1">
-              <input type="number" step="any" disabled={!hasWeight} {...register('weight')} className={inputClass} placeholder="Peso" />
-              <select {...register('weightUnit')} className={inputClass}>
-                {['mg', 'g', 'kg', 'lb'].map((unit) => <option key={unit} value={unit}>{unit}</option>)}
-              </select>
-            </div>
-          </div>}
         </div>
         <div>
           <label className={labelClass}>SKU *</label>
@@ -394,6 +332,25 @@ export default function ProductForm({
           </select>
           {errors.categoryId && <p className="text-xs text-red-600 mt-0.5">{errors.categoryId.message}</p>}
         </div>
+
+        {isPaleta && (
+          <div className="sm:col-span-2">
+            <label className={labelClass}>Formato de paleta</label>
+            <div className="flex flex-wrap gap-3 mt-2">
+              {['Diamante', 'Lágrima', 'Redondo'].map((opt) => (
+                <label key={opt} className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    value={opt}
+                    {...register('shape')}
+                    className="w-4 h-4 accent-[#C8FF00] cursor-pointer"
+                  />
+                  <span className="text-sm text-gray-700">{opt}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="sm:col-span-2">
           <div className="flex items-center justify-between">
